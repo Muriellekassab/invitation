@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitation Mariage</title>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: "Poppins", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    .slider {
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+    }
+
+    .slide {
+      height: 100vh;
+      width: 100%;
+      position: relative;
+      scroll-snap-align: start;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(70%);
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    .overlay h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .overlay p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #333;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      margin: 5px;
+    }
+
+    .btn:hover {
+      background: white;
+    }
+
+    /* Points de progression */
+    .progress {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      transition: background 0.3s;
+    }
+
+    .dot.active {
+      background: white;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Slider vertical -->
+<div class="slider" id="slider">
+    <!-- Slide 1 -->
+    <div class="slide">
+        <img src="https://picsum.photos/id/1015/1920/1080" alt="">
+        <div class="overlay">
+            <h2>Bienvenue {{Nom}}</h2>
+            <p>Vous êtes invité à partager un moment unique</p>
+        </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+        <img src="https://picsum.photos/id/1016/1920/1080" alt="">
+        <div class="overlay">
+            <h2>Yorgo & Mayane</h2>
+            <p>Le 15 Septembre 2025 à Beyrouth</p>
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+        <img src="https://picsum.photos/id/1018/1920/1080" alt="">
+        <div class="overlay">
+            <h2>Confirmez votre présence</h2>
+            <a href="tel:+14387256675" class="btn">📞 Appeler pour confirmer</a>
+            <a href="https://wa.me/14387256675?text=Je%20confirme%20ma%20présence" class="btn">💬 WhatsApp</a>
+        </div>
+    </div>
+</div>
+
+<!-- Dots de progression -->
+<div class="progress" id="progress">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+</div>
+
+<!-- Musique -->
+<audio autoplay loop>
+    <source src="musique.mp3" type="audio/mpeg">
+    Votre navigateur ne supporte pas l’audio.
+</audio>
+
+<script>
+    // --- Liste des invités avec ID ---
+    const invites = {
+      "001": "GIO",
+      "002": "Marie",
+      "003": "Antoine",
+      "004": "Carla"
+    };
+
+    // --- Récupération ID invité depuis l’URL ---
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id") || "001";
+    const nom = invites[id] || "Invité";
+
+    // --- Remplacement du texte ---
+    document.body.innerHTML = document.body.innerHTML.replace("{{Nom}}", nom);
+
+    // --- Progression dots ---
+    const slider = document.getElementById("slider");
+    const dots = document.querySelectorAll(".dot");
+
+    slider.addEventListener("scroll", () => {
+      const index = Math.round(slider.scrollTop / window.innerHeight);
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+    });
+  </script>
+
+</body>
+</html>
