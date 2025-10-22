@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Invitation Mariage</title>
+    <title>Wadih & Caline's Wedding</title>
     <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body,html{height:100%;font-family:"Poppins",sans-serif;background:#000}
@@ -111,7 +111,8 @@ body,html{height:100%;font-family:"Poppins",sans-serif;background:#000}
     </div>
 </div>
 
-<audio id="audio" loop>
+<!-- Audio -->
+<audio id="audio" loop autoplay>
     <source src="musique.mp3" type="audio/mpeg">
 </audio>
 
@@ -268,13 +269,6 @@ const dots = document.querySelectorAll(".dot");
 slider.addEventListener("scroll", ()=>{
   const idx = Math.round(slider.scrollTop/window.innerHeight);
   dots.forEach((d,i)=>d.classList.toggle("active",i===idx));
-});
-
-// Audio auto-play
-const audio = el("audio");
-document.addEventListener("scroll", function playAudio(){
-  audio.play().catch(()=>{});
-  document.removeEventListener("scroll", playAudio);
 });
 
 // Countdown
