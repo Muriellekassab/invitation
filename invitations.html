@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Invitation Mariage</title>
+    <style>
+*{box-sizing:border-box;margin:0;padding:0}
+body,html{height:100%;font-family:"Poppins",sans-serif;background:#000}
+.slider{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory}
+.slide{height:100vh;position:relative;scroll-snap-align:start}
+.slide img{width:100%;height:100%;object-fit:cover;filter:brightness(65%);position:absolute}
+.overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#fff;padding:20px}
+.overlay h2{font-size:32px;margin-bottom:12px}
+.overlay p{font-size:18px;margin-bottom:18px}
+.btn{display:inline-block;padding:12px 22px;border-radius:25px;background:rgba(255,255,255,0.9);color:#222;text-decoration:none;font-weight:700;margin:6px;cursor:pointer}
+.btn.disabled{background:rgba(200,200,200,0.7);cursor:default}
+.progress{position:fixed;right:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:10}
+.dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.45)}
+.dot.active{background:#fff}
+#lang-toggle{position:fixed;top:18px;left:18px;background:rgba(255,255,255,0.9);border:none;border-radius:18px;padding:8px 12px;font-weight:700;z-index:20;cursor:pointer}
+/* popup formulaire */
+.modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:30}
+.modal{background:#fff;color:#222;padding:20px;border-radius:12px;max-width:420px;width:92%}
+.modal h3{margin-bottom:8px}
+.field{margin:10px 0}
+.field label{display:block;font-size:14px;margin-bottom:6px}
+.field input[type="text"], .field input[type="number"]{width:100%;padding:10px;border-radius:8px;border:1px solid #ccc}
+.row{display:flex;gap:8px}
+.rtl{direction:rtl;font-family:"Amiri",serif}
+/* responsive */
+@media(max-width:480px){.overlay h2{font-size:26px}.overlay p{font-size:16px}}
+</style>
+</head>
+<body>
+
+<button id="lang-toggle">FR / العربية</button>
+
+<div class="slider" id="slider">
+    <!-- Slide 1: Welcome -->
+    <div class="slide">
+        <img src="https://picsum.photos/id/1015/1920/1080" alt="">
+        <div class="overlay">
+            <h2 id="welcome">Bienvenue</h2>
+            <p id="intro">Vous êtes invité à partager un moment unique</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Couple Info -->
+    <div class="slide">
+        <img src="https://picsum.photos/id/1016/1920/1080" alt="">
+        <div class="overlay">
+            <h2 id="names">Yorgo & Mayane</h2>
+            <p id="date">Le 15 Septembre 2025 à Beyrouth</p>
+        </div>
+    </div>
+
+    <!-- Slide 3: Countdown -->
+    <div class="slide">
+        <img src="https://picsum.photos/id/1020/1920/1080" alt="">
+        <div class="overlay">
+            <h2 id="countdownTitle">Compte à rebours jusqu'au mariage</h2>
+            <p id="countdownTimer"></p>
+        </div>
+    </div>
+
+    <!-- Slide 4: RSVP -->
+    <div class="slide">
+        <img src="https://picsum.photos/id/1018/1920/1080" alt="">
+        <div class="overlay">
+            <h2 id="confirm">Confirmez votre présence</h2>
+            <button id="rsvpBtn" class="btn">Je confirme ma présence</button>
+            <a id="whatsBtn" class="btn" href="#" target="_blank">💬 WhatsApp</a>
+        </div>
+    </div>
+</div>
+
+<div class="progress" id="progress">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+</div>
+
+<!-- Modal RSVP -->
+<div class="modal-back" id="modalBack">
+    <div class="modal" id="modal">
+        <h3 id="modalTitle">Confirmer votre présence</h3>
+
+        <div class="field">
+            <label id="labelName">Nom</label>
+            <input type="text" id="guestName" readonly>
+        </div>
+
+        <div class="field">
+            <label id="labelCount">Nombre de personnes</label>
+            <input type="number" id="count" min="1" value="1">
+        </div>
+
+        <div class="field">
+            <label id="labelMessage">Message (optionnel)</label>
+            <input type="text" id="message" placeholder="">
+        </div>
+
+        <div class="row">
+            <button id="sendBtn" class="btn">Envoyer</button>
+            <button id="closeBtn" class="btn">Annuler</button>
+        </div>
+
+        <p id="feedback" style="margin-top:10px;font-size:14px"></p>
+    </div>
+</div>
+
+<audio id="audio" loop>
+    <source src="musique.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjkaqovv";
+const WHATS_NUMBER = "14387256675";
+const WHATS_TEXT_FR = "Je confirme ma présence";
+const WHATS_TEXT_AR = "أؤكد حضوري";
+
+const params = new URLSearchParams(window.location.search);
+const nomParam = params.get("nom") || "";
+const guestName = decodeURIComponent(nomParam.replace(/\+/g," ")) || "Invité";
+
+const texts = {
+  fr: {
+    welcome: `Bienvenue ${guestName}`,
+    intro: "Vous êtes invité à partager un moment unique",
+    names: "Yorgo & Mayane",
+    date: "Le 15 Septembre 2025 à Beyrouth",
+    confirm: "Confirmez votre présence",
+    rsvpBtn: "Je confirme ma présence",
+    alreadyConfirmed: "Vous avez déjà confirmé",
+    whatsBtn: "💬 WhatsApp",
+    modalTitle: "Confirmer votre présence",
+    labelName: "Nom",
+    labelCount: "Nombre de personnes",
+    labelMessage: "Message (optionnel)",
+    sendBtn: "Envoyer",
+    closeBtn: "Annuler",
+    feedbackSending: "Envoi en cours...",
+    feedbackSuccess: "Merci ! Votre confirmation a bien été envoyée.",
+    feedbackError: "Erreur lors de l'envoi. Réessayez."
+  },
+  ar: {
+    welcome: `أهلاً وسهلاً ${guestName}`,
+    intro: "أنت مدعو لمشاركتنا هذه اللحظة المميزة",
+    names: "يورغو و ميان",
+    date: "١٥ أيلول ٢٠٢٥ - بيروت",
+    confirm: "يرجى تأكيد الحضور",
+    rsvpBtn: "أؤكد حضوري",
+    alreadyConfirmed: "لقد أكدت حضورك",
+    whatsBtn: "💬 واتساب",
+    modalTitle: "تأكيد الحضور",
+    labelName: "الاسم",
+    labelCount: "عدد الأشخاص",
+    labelMessage: "رسالة (اختياري)",
+    sendBtn: "إرسال",
+    closeBtn: "إلغاء",
+    feedbackSending: "جاري الإرسال...",
+    feedbackSuccess: "شكراً! تم تسجيل تأكيدك.",
+    feedbackError: "حدث خطأ أثناء الإرسال. حاول مرة أخرى."
+  }
+};
+
+let lang = "fr";
+
+const el = id => document.getElementById(id);
+const welcomeEl = el("welcome");
+const introEl = el("intro");
+const namesEl = el("names");
+const dateEl = el("date");
+const confirmEl = el("confirm");
+const rsvpBtn = el("rsvpBtn");
+const whatsBtn = el("whatsBtn");
+const langToggle = el("lang-toggle");
+const modalBack = el("modalBack");
+const guestNameInput = el("guestName");
+const countInput = el("count");
+const messageInput = el("message");
+const sendBtn = el("sendBtn");
+const closeBtn = el("closeBtn");
+const feedback = el("feedback");
+const modalTitle = el("modalTitle");
+const labelName = el("labelName");
+const labelCount = el("labelCount");
+const labelMessage = el("labelMessage");
+
+// Language & button
+function applyLang(){
+  const t = texts[lang];
+  welcomeEl.innerText = t.welcome;
+  introEl.innerText = t.intro;
+  namesEl.innerText = t.names;
+  dateEl.innerText = t.date;
+  confirmEl.innerText = t.confirm;
+  modalTitle.innerText = t.modalTitle;
+  labelName.innerText = t.labelName;
+  labelCount.innerText = t.labelCount;
+  labelMessage.innerText = t.labelMessage;
+  sendBtn.innerText = t.sendBtn;
+  closeBtn.innerText = t.closeBtn;
+  feedback.innerText = "";
+  document.body.classList.toggle("rtl", lang==="ar");
+  const text = lang==="fr"?WHATS_TEXT_FR:WHATS_TEXT_AR;
+  whatsBtn.href = `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(text + " - " + guestName)}`;
+  guestNameInput.value = guestName;
+  updateRsvpButton();
+}
+
+langToggle.addEventListener("click", ()=>{lang = (lang==="fr"?"ar":"fr"); applyLang();});
+rsvpBtn.addEventListener("click", ()=>{modalBack.style.display="flex"; applyLang();});
+closeBtn.addEventListener("click", ()=>{modalBack.style.display="none"; feedback.innerText="";});
+
+// RSVP status
+function updateRsvpButton(){
+  const t = texts[lang];
+  const status = localStorage.getItem('rsvp_status_'+guestName);
+  if(status==='confirmed'){
+    rsvpBtn.outerHTML = `<span class="btn disabled">${t.alreadyConfirmed}</span>`;
+  }
+}
+
+// Send RSVP
+sendBtn.addEventListener("click", async ()=>{
+  const t = texts[lang];
+  feedback.style.color="#333";
+  feedback.innerText=t.feedbackSending;
+
+  const payload = {
+    "nom": guestNameInput.value,
+    "nombre_personnes": countInput.value,
+    "message": messageInput.value || "",
+    "langue": lang,
+    "date_reponse": new Date().toISOString()
+  };
+
+  try{
+    const res = await fetch(FORMSPREE_ENDPOINT,{
+      method:"POST",
+      headers:{"Accept":"application/json","Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
+
+    if(res.ok){
+      feedback.style.color="green";
+      feedback.innerText=t.feedbackSuccess;
+      localStorage.setItem('rsvp_status_'+guestName,'confirmed');
+      updateRsvpButton();
+      setTimeout(()=>{modalBack.style.display="none";},1600);
+    } else {
+      feedback.style.color="crimson";
+      feedback.innerText=t.feedbackError;
+    }
+  } catch(err){
+    feedback.style.color="crimson";
+    feedback.innerText=t.feedbackError;
+    console.error(err);
+  }
+});
+
+// Progress dots
+const slider = el("slider");
+const dots = document.querySelectorAll(".dot");
+slider.addEventListener("scroll", ()=>{
+  const idx = Math.round(slider.scrollTop/window.innerHeight);
+  dots.forEach((d,i)=>d.classList.toggle("active",i===idx));
+});
+
+// Audio auto-play
+const audio = el("audio");
+document.addEventListener("scroll", function playAudio(){
+  audio.play().catch(()=>{});
+  document.removeEventListener("scroll", playAudio);
+});
+
+// Countdown
+const weddingDate = new Date("2026-08-21T18:00:00");
+function updateCountdown(){
+  const now = new Date();
+  const diff = weddingDate - now;
+  if(diff<=0){el("countdownTimer").innerText=lang==="fr"?"Le mariage est arrivé!":"لقد وصل موعد الزفاف!";return;}
+  const days=Math.floor(diff/(1000*60*60*24));
+  const hours=Math.floor((diff/(1000*60*60))%24);
+  const minutes=Math.floor((diff/(1000*60))%60);
+  const seconds=Math.floor((diff/1000)%60);
+  el("countdownTimer").innerText=`${days}days ${hours}h ${minutes}m ${seconds}s`;
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+// Init
+applyLang();
+</script>
+</body>
+</html>
