@@ -3,68 +3,229 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Wadih & Caline's Wedding</title>
+    <title>Invitation Mariage - Wadih & Caline</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body,html{height:100%;font-family:"Poppins",sans-serif;background:#000}
-.slider{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory}
-.slide{height:100vh;position:relative;scroll-snap-align:start}
-.slide img{width:100%;height:100%;object-fit:cover;filter:brightness(65%);position:absolute}
-.overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#fff;padding:20px}
-.overlay h2{font-size:32px;margin-bottom:12px}
-.overlay p{font-size:18px;margin-bottom:18px}
-.btn{display:inline-block;padding:12px 22px;border-radius:25px;background:rgba(255,255,255,0.9);color:#222;text-decoration:none;font-weight:700;margin:6px;cursor:pointer}
-.btn.disabled{background:rgba(200,200,200,0.7);cursor:default}
-.progress{position:fixed;right:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:10}
-.dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.45)}
-.dot.active{background:#fff}
-#lang-toggle{position:fixed;top:18px;left:18px;background:rgba(255,255,255,0.9);border:none;border-radius:18px;padding:8px 12px;font-weight:700;z-index:20;cursor:pointer}
-/* popup formulaire */
-.modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:30}
-.modal{background:#fff;color:#222;padding:20px;border-radius:12px;max-width:420px;width:92%}
-.modal h3{margin-bottom:8px}
-.field{margin:10px 0}
-.field label{display:block;font-size:14px;margin-bottom:6px}
-.field input[type="text"], .field input[type="number"]{width:100%;padding:10px;border-radius:8px;border:1px solid #ccc}
-.row{display:flex;gap:8px}
-.rtl{direction:rtl;font-family:"Amiri",serif}
-/* responsive */
-@media(max-width:480px){.overlay h2{font-size:26px}.overlay p{font-size:16px}}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body, html { height: auto; font-family: "Poppins", sans-serif; background: #000; color: #fff; overflow: auto; }
+
+/* Navbar styles */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+.navbar {
+  background: #87CEEB !important;
+  padding: 15px 20px;
+}
+.navbar-brand h4 {
+  font-style: italic;
+  color: #fff !important;
+  font-weight: 600;
+}
+/* Add spacing between carousel dots */
+.carousel-indicators [data-bs-target] {
+  margin: 2 6px; /* Adjust the number for more or less spacing */
+}
+.container-fluid mobile-menu-top {
+  position: relative; /* ensure it’s above the overlay */
+  z-index: 2;         /* higher than the overlay z-index: 0 */
+}
+
+#lang-toggle {
+  color: #fff !important;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+}
+#lang-toggle:hover {
+  text-decoration: underline;
+}
+
+/* First page */
+#firstPage {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  overflow: visible;
+  background: #87CEEB;
+  transition: background 1s ease;
+}
+#firstPage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('murielle.jpg') center/cover no-repeat;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 1;
+}
+#firstPage.bg-photo::before { opacity: 0.5; }
+
+.heart {
+  font-size: 80px;
+  color: white;
+  animation: beat 1s infinite alternate;
+  margin-bottom: 20px;
+  z-index: 5;
+}
+@keyframes beat { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
+
+/* Welcome box */
+#welcomeBox {
+  width: 360px;
+  background: rgba(255,255,255,0.95);
+  color: #222;
+  padding: 20px 24px 24px 24px;
+  border-radius: 12px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+  position: relative;
+  z-index: 5;
+}
+#welcomeBox.show { opacity: 1; transform: translateY(0); }
+
+#line { height: 1px; background: #ccc; margin: 12px 0; width: 100%; }
+#welcomeBtn {
+  background: #87CEFA;
+  color: #fff;
+  font-weight: 700;
+  margin-top: auto;
+  align-self: flex-end;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+/* Welcome quote at top center in italic */
+#welcome {
+  font-size: 15px;            /* Adjust size */
+  font-style: italic;          /* Italic text */
+  font-weight: 400;            /* Bold-ish */
+  text-align: center;          /* Center text */
+  color: #fff;                 /* White text */
+  position: relative;          /* Absolute positioning */
+  top: -260px;                   /* Distance from top */
+  left: 50%;                   /* Center horizontally */
+  transform: translateX(-50%); /* Center exactly */
+  max-width: 80%;              /* Prevent stretching */
+  line-height: 1.2;            /* Spacing between lines */
+  z-index: 5;                  /* Keep it above background */
+  padding: 0 10px;             /* Padding for small screens */
+}
+#groomsparents {
+  font-size: 15px;            /* Adjust size */
+  font-style: auto;          /* Italic text */
+  font-weight: 400;            /* Bold-ish */
+  text-align: left;          /* Center text */
+  color: #fff;                 /* White text */
+  position: relative;          /* Absolute positioning */
+  top: -200px;                   /* Distance from top */
+  left: 25%;                   /* Center horizontally */
+  transform: translateX(-25%); /* Center exactly */
+  max-width: 80%;              /* Prevent stretching */
+  line-height: 1.2;            /* Spacing between lines */
+  z-index: 5;                  /* Keep it above background */
+  padding: 0 10px;             /* Padding for small screens */
+}
+
+
+/* Slider */
+.slider { height: auto; overflow-y: hidden; scroll-snap-type: y mandatory; display: none;  }
+.slide { height: 100vh; position: relative; scroll-snap-align: start; }
+.slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(65%); position: absolute; }
+.overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; padding: 20px; }
+.overlay h2 { font-size: 32px; margin-bottom: 12px; }
+.overlay p { font-size: 18px; margin-bottom: 18px; }
+.btn { display: inline-block; padding: 12px 22px; border-radius: 25px; background: rgba(255,255,255,0.9); color: #222; text-decoration: none; font-weight: 700; margin: 6px; cursor: pointer; }
+
+/* Progress dots*/
+.progress { position: relative; right: 20px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 10; }
+.dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.45); }
+.dot.active { background: #fff; }
+
+
+/* Modal */
+.modal-back { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 30; }
+.modal { background: #fff; color: #222; padding: 20px; border-radius: 12px; max-width: 420px; width: 92%; }
+.modal h3 { margin-bottom: 8px; }
+.field { margin: 10px 0; }
+.field label { display: block; font-size: 14px; margin-bottom: 6px; }
+.field input[type="text"], .field input[type="number"] { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+.row { display: flex; gap: 8px; }
+
+@media(max-width:480px){ .overlay h2{font-size:26px} .overlay p{font-size:16px} }
 </style>
 </head>
 <body>
 
-<button id="lang-toggle">FR / العربية</button>
+<!-- ✅ Inserted your header with FR/AR button -->
+<header>
+    <nav id="navbar-top" class="navbar navbar-expand-lg navbar-dark py-0">
+        <div class="container-fluid mobile-menu-top">
+            <a class="navbar-brand logo py-0" href="#">
+                <h4 class="font-whiteangelica">W &amp; C</h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav">
+                <img src="https://cdn-icons-png.flaticon.com/512/56/56763.png" style="width:24px;" alt="toggle">
+            </button>
+            <div class="collapse navbar-collapse" id="main-nav">
+                <ul class="navbar-nav ms-auto font-playfair">
+                    <li class="nav-item">
+                        <button id="lang-toggle" class="nav-link btn btn-link">FR / العربية</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
 
+<!-- FIRST PAGE -->
+<div  id="firstPage">
+    <div class="heart">❤</div>
+    <div id="welcomeBox">
+        <h2>To: <span id="guestNameDisplay"></span></h2>
+        <div id="line"></div>
+        <p>Join us to celebrate!</p>
+        <div id="line"></div>
+        <button id="welcomeBtn">Let's Celebrate</button>
+    </div>
+</div>
+
+<!-- SLIDES -->
 <div class="slider" id="slider">
-    <!-- Slide 1: Welcome -->
     <div class="slide">
-        <img src="https://picsum.photos/id/1015/1920/1080" alt="">
+        <img src="murielle1.jpg" alt="">
         <div class="overlay">
-            <h2 id="welcome">Bienvenue</h2>
-            <p id="intro">Vous êtes invité à partager un moment unique</p>
+            <h2 id="welcome">"When you pass through the waters, I will be with you; and through the rivers, they shall not overwhelm you."</h2>
+            <p id="groomsparents">Michel &amp; Nelly Khoueiry</p>
         </div>
     </div>
-
-    <!-- Slide 2: Couple Info -->
     <div class="slide">
-        <img src="https://picsum.photos/id/1016/1920/1080" alt="">
+        <img src="murielle2.jpg" alt="">
         <div class="overlay">
-            <h2 id="names">Yorgo & Mayane</h2>
-            <p id="date">Le 15 Septembre 2025 à Beyrouth</p>
+            <h2 id="names">Wadih & Caline</h2>
+            <p id="date">Le 21 Août 2026 à Beyrouth</p>
         </div>
     </div>
-
-    <!-- Slide 3: Countdown -->
     <div class="slide">
-        <img src="https://picsum.photos/id/1020/1920/1080" alt="">
+        <img src="murielle3.jpg" alt="">
         <div class="overlay">
             <h2 id="countdownTitle">Compte à rebours jusqu'au mariage</h2>
             <p id="countdownTimer"></p>
         </div>
     </div>
-
-    <!-- Slide 4: RSVP -->
     <div class="slide">
         <img src="https://picsum.photos/id/1018/1920/1080" alt="">
         <div class="overlay">
@@ -80,188 +241,74 @@ body,html{height:100%;font-family:"Poppins",sans-serif;background:#000}
     <div class="dot"></div>
     <div class="dot"></div>
     <div class="dot"></div>
+    <div class="dot"></div>
 </div>
 
-<!-- Modal RSVP -->
+<!-- RSVP Modal -->
 <div class="modal-back" id="modalBack">
     <div class="modal" id="modal">
         <h3 id="modalTitle">Confirmer votre présence</h3>
-
         <div class="field">
             <label id="labelName">Nom</label>
             <input type="text" id="guestName" readonly>
         </div>
-
         <div class="field">
             <label id="labelCount">Nombre de personnes</label>
             <input type="number" id="count" min="1" value="1">
         </div>
-
         <div class="field">
             <label id="labelMessage">Message (optionnel)</label>
             <input type="text" id="message" placeholder="">
         </div>
-
         <div class="row">
             <button id="sendBtn" class="btn">Envoyer</button>
             <button id="closeBtn" class="btn">Annuler</button>
         </div>
-
         <p id="feedback" style="margin-top:10px;font-size:14px"></p>
     </div>
 </div>
 
-<!-- Audio -->
-<audio id="audio" loop autoplay>
+<audio id="audio" loop>
     <source src="musique.mp3" type="audio/mpeg">
+    Votre navigateur ne supporte pas l'audio.
 </audio>
 
 <script>
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjkaqovv";
-const WHATS_NUMBER = "14387256675";
-const WHATS_TEXT_FR = "Je confirme ma présence";
-const WHATS_TEXT_AR = "أؤكد حضوري";
-
+// Guest name
 const params = new URLSearchParams(window.location.search);
-const nomParam = params.get("nom") || "";
-const guestName = decodeURIComponent(nomParam.replace(/\+/g," ")) || "Invité";
+const guestName = decodeURIComponent((params.get("nom") || "Invité").replace(/\+/g," "));
+document.getElementById("guestNameDisplay").innerText = guestName;
 
+// Language data
 const texts = {
-  fr: {
-    welcome: `Bienvenue ${guestName}`,
-    intro: "Vous êtes invité à partager un moment unique",
-    names: "Yorgo & Mayane",
-    date: "Le 15 Septembre 2025 à Beyrouth",
-    confirm: "Confirmez votre présence",
-    rsvpBtn: "Je confirme ma présence",
-    alreadyConfirmed: "Vous avez déjà confirmé",
-    whatsBtn: "💬 WhatsApp",
-    modalTitle: "Confirmer votre présence",
-    labelName: "Nom",
-    labelCount: "Nombre de personnes",
-    labelMessage: "Message (optionnel)",
-    sendBtn: "Envoyer",
-    closeBtn: "Annuler",
-    feedbackSending: "Envoi en cours...",
-    feedbackSuccess: "Merci ! Votre confirmation a bien été envoyée.",
-    feedbackError: "Erreur lors de l'envoi. Réessayez."
-  },
-  ar: {
-    welcome: `أهلاً وسهلاً ${guestName}`,
-    intro: "أنت مدعو لمشاركتنا هذه اللحظة المميزة",
-    names: "يورغو و ميان",
-    date: "١٥ أيلول ٢٠٢٥ - بيروت",
-    confirm: "يرجى تأكيد الحضور",
-    rsvpBtn: "أؤكد حضوري",
-    alreadyConfirmed: "لقد أكدت حضورك",
-    whatsBtn: "💬 واتساب",
-    modalTitle: "تأكيد الحضور",
-    labelName: "الاسم",
-    labelCount: "عدد الأشخاص",
-    labelMessage: "رسالة (اختياري)",
-    sendBtn: "إرسال",
-    closeBtn: "إلغاء",
-    feedbackSending: "جاري الإرسال...",
-    feedbackSuccess: "شكراً! تم تسجيل تأكيدك.",
-    feedbackError: "حدث خطأ أثناء الإرسال. حاول مرة أخرى."
-  }
+  fr: { welcome:`"When you pass through the waters, I will be with you; and through the rivers, they shall not overwhelm you"`, groomsparents:'Michel & Nelly<br>   Khoueiry', date:"Le 21 Août 2026 à Beyrouth", confirm:"Confirmez votre présence", rsvpBtn:"Je confirme ma présence", whatsBtn:"💬 WhatsApp", modalTitle:"Confirmer votre présence", labelName:"Nom", labelCount:"Nombre de personnes", labelMessage:"Message (optionnel)", sendBtn:"Envoyer", closeBtn:"Annuler", feedbackSending:"Envoi en cours...", feedbackSuccess:"Merci ! Votre confirmation a bien été envoyée.", feedbackError:"Erreur lors de l'envoi. Réessayez." },
+  ar: { welcome:`عندما تمرون بالمياه سأكون معكم، والأنهار لن تغرقك`, groomsparents:"أنت مدعو لمشاركتنا هذه اللحظة المميزة", names:"وَدِيع وكالين", date:"٢١ أغسطس ٢٠٢٦ - بيروت", confirm:"يرجى تأكيد الحضور", rsvpBtn:"أؤكد حضوري", whatsBtn:"💬 واتساب", modalTitle:"تأكيد الحضور", labelName:"الاسم", labelCount:"عدد الأشخاص", labelMessage:"رسالة (اختياري)", sendBtn:"إرسال", closeBtn:"إلغاء", feedbackSending:"جاري الإرسال...", feedbackSuccess:"شكراً! تم تسجيل تأكيدك.", feedbackError:"حدث خطأ أثناء الإرسال. حاول مرة أخرى." }
 };
-
 let lang = "fr";
 
 const el = id => document.getElementById(id);
-const welcomeEl = el("welcome");
-const introEl = el("intro");
-const namesEl = el("names");
-const dateEl = el("date");
-const confirmEl = el("confirm");
-const rsvpBtn = el("rsvpBtn");
-const whatsBtn = el("whatsBtn");
-const langToggle = el("lang-toggle");
-const modalBack = el("modalBack");
-const guestNameInput = el("guestName");
-const countInput = el("count");
-const messageInput = el("message");
-const sendBtn = el("sendBtn");
-const closeBtn = el("closeBtn");
-const feedback = el("feedback");
-const modalTitle = el("modalTitle");
-const labelName = el("labelName");
-const labelCount = el("labelCount");
-const labelMessage = el("labelMessage");
-
-// Language & button
 function applyLang(){
   const t = texts[lang];
-  welcomeEl.innerText = t.welcome;
-  introEl.innerText = t.intro;
-  namesEl.innerText = t.names;
-  dateEl.innerText = t.date;
-  confirmEl.innerText = t.confirm;
-  modalTitle.innerText = t.modalTitle;
-  labelName.innerText = t.labelName;
-  labelCount.innerText = t.labelCount;
-  labelMessage.innerText = t.labelMessage;
-  sendBtn.innerText = t.sendBtn;
-  closeBtn.innerText = t.closeBtn;
-  feedback.innerText = "";
-  document.body.classList.toggle("rtl", lang==="ar");
-  const text = lang==="fr"?WHATS_TEXT_FR:WHATS_TEXT_AR;
-  whatsBtn.href = `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(text + " - " + guestName)}`;
-  guestNameInput.value = guestName;
-  updateRsvpButton();
+  el("welcome").innerText=t.welcome;
+  el("groomsparents").innerHTML=t.groomsparents;
+  el("names").innerText=t.names;
+  el("date").innerText=t.date;
+  el("confirm").innerText=t.confirm;
+  el("modalTitle").innerText=t.modalTitle;
+  el("guestName").value=guestName;
+  el("rsvpBtn").innerText=t.rsvpBtn;
+  el("whatsBtn").innerText=t.whatsBtn;
+  el("labelName").innerText=t.labelName;
+  el("labelCount").innerText=t.labelCount;
+  el("labelMessage").innerText=t.labelMessage;
+  el("sendBtn").innerText=t.sendBtn;
+  el("closeBtn").innerText=t.closeBtn;
+  el("whatsBtn").href=`https://wa.me/14387256675?text=${encodeURIComponent(t.rsvpBtn+" - "+guestName)}`;
 }
+applyLang();
 
-langToggle.addEventListener("click", ()=>{lang = (lang==="fr"?"ar":"fr"); applyLang();});
-rsvpBtn.addEventListener("click", ()=>{modalBack.style.display="flex"; applyLang();});
-closeBtn.addEventListener("click", ()=>{modalBack.style.display="none"; feedback.innerText="";});
-
-// RSVP status
-function updateRsvpButton(){
-  const t = texts[lang];
-  const status = localStorage.getItem('rsvp_status_'+guestName);
-  if(status==='confirmed'){
-    rsvpBtn.outerHTML = `<span class="btn disabled">${t.alreadyConfirmed}</span>`;
-  }
-}
-
-// Send RSVP
-sendBtn.addEventListener("click", async ()=>{
-  const t = texts[lang];
-  feedback.style.color="#333";
-  feedback.innerText=t.feedbackSending;
-
-  const payload = {
-    "nom": guestNameInput.value,
-    "nombre_personnes": countInput.value,
-    "message": messageInput.value || "",
-    "langue": lang,
-    "date_reponse": new Date().toISOString()
-  };
-
-  try{
-    const res = await fetch(FORMSPREE_ENDPOINT,{
-      method:"POST",
-      headers:{"Accept":"application/json","Content-Type":"application/json"},
-      body:JSON.stringify(payload)
-    });
-
-    if(res.ok){
-      feedback.style.color="green";
-      feedback.innerText=t.feedbackSuccess;
-      localStorage.setItem('rsvp_status_'+guestName,'confirmed');
-      updateRsvpButton();
-      setTimeout(()=>{modalBack.style.display="none";},1600);
-    } else {
-      feedback.style.color="crimson";
-      feedback.innerText=t.feedbackError;
-    }
-  } catch(err){
-    feedback.style.color="crimson";
-    feedback.innerText=t.feedbackError;
-    console.error(err);
-  }
-});
+// Lang toggle
+document.getElementById("lang-toggle").addEventListener("click",()=>{ lang = lang==="fr"?"ar":"fr"; applyLang(); });
 
 // Progress dots
 const slider = el("slider");
@@ -270,6 +317,27 @@ slider.addEventListener("scroll", ()=>{
   const idx = Math.round(slider.scrollTop/window.innerHeight);
   dots.forEach((d,i)=>d.classList.toggle("active",i===idx));
 });
+
+// Show welcome box after 2s
+setTimeout(()=>{
+  document.getElementById("welcomeBox").classList.add("show");
+  document.querySelector(".heart").style.display="none";
+  document.getElementById("firstPage").classList.add("bg-photo");
+},2000);
+
+// Let's celebrate button
+document.getElementById("welcomeBtn").addEventListener("click",()=>{
+    document.getElementById("welcomeBox").style.display = "none";
+    document.querySelector(".heart").style.display = "none";
+
+    // Show the slider on top
+    document.getElementById("slider").style.display = "block";
+
+    // Allow scrolling on the body
+    document.body.style.overflow = "auto";
+    el("audio").play().catch(err=>console.log("Autoplay blocked:",err));
+});
+
 
 // Countdown
 const weddingDate = new Date("2026-08-21T18:00:00");
