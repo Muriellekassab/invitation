@@ -167,6 +167,7 @@ header {
   cursor: pointer;
 }
 /* Welcome quote at top center in italic */
+
 /* TOP CENTER QUOTE - second slide */
 #slider .slide.quote-slide #welcome {
   position: absolute;
@@ -174,7 +175,7 @@ header {
   left: 50%;
   transform: translateX(-50%);
   font-style: italic;
-  font-weight: 100;
+  font-weight: 50;
   font-size: 12px;
   color: #fff;
   max-width: 90%;
@@ -190,7 +191,6 @@ header {
     top: 15px;
   }
 }
-
 
 #groomsparents {
   font-size: 15px;            /* Adjust size */
@@ -213,7 +213,7 @@ header {
 .slider { height: auto; overflow-y: hidden; scroll-snap-type: y mandatory; display: none;position: relative;z-index:1;  }
 .slide { height: 100%; width: 100%; position: relative; scroll-snap-align: start; }
 .slide img { width: 100%; height: auto; object-fit: cover; object-position: center top; filter: brightness(65%);  }
-.overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; padding: 20px; }
+.overlay { position: absolute; inset: 0; text-align: center; color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .overlay h2 { font-size: 32px; margin-bottom: 12px; }
 .overlay p { font-size: 18px; margin-bottom: 18px; }
 .btn { display: inline-block; padding: 12px 22px; border-radius: 25px; background: rgba(255,255,255,0.9); color: #222; text-decoration: none; font-weight: 700; margin: 6px; cursor: pointer; }
@@ -308,7 +308,7 @@ header {
     <div class="slide">
         <img src="1.jpg" alt="">
         <div class="overlay">
-            <h1 id="welcome">"So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate."(Matthew 19:6)</h1>
+            <p id="welcome">"So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate."(Matthew 19:6)</p>
             <p id="groomsparents">Michel &amp; Nelly Khoueiry</p>
         </div>
     </div>
@@ -613,15 +613,3 @@ applyLang();
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
