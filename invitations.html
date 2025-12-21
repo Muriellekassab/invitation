@@ -8,6 +8,7 @@
     <link href="https://fonts.google.com/specimen/Rubik+Scribble" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Courgette" rel="stylesheet"/>
     <style>
+
 * { box-sizing: border-box;
   margin: 0;
   padding: 0; }
@@ -36,10 +37,13 @@ header {
 }
 
 /* Brand */
+.navbar-brand {
+    text-decoration: none; /* remove underline */
+}
 .navbar-brand h4 {
   margin: 0;
   font-style: italic;
-  color: #fff;
+  color: #811C23;
   font-weight: 600;
 }
 /* Add spacing between carousel dots */
@@ -51,7 +55,7 @@ header {
   z-index: 2;
 }
 #lang-toggle {
-  color: #fff;
+  color: #811C23;
   background: transparent;
   border: none;
   font-weight: 600;
@@ -126,7 +130,7 @@ header {
 }
 .heart {
   font-size: 80px;
-  color: white;
+  color: #811C23;
   animation: beat 1s infinite alternate;
   margin-bottom: 20px;
   z-index: 5;
@@ -154,7 +158,7 @@ header {
 #line { height: 1px; background: #ccc; margin: 12px 0; width: 100%; }
 #welcomeBtn {
   background:#EDE4D3;
-  color: #fff;
+  color: #811C23;
   font-weight: 700;
   margin-top: auto;
   align-self: flex-end;
@@ -170,9 +174,8 @@ header {
   text-align: center;          /* Center text */
   color: #fff;                 /* White text */
   position: relative;          /* Absolute positioning */
-  top: -260px;                   /* Distance from top */
-  left: 50%;                   /* Center horizontally */
-  transform: translateX(-50%); /* Center exactly */
+  top: -700px;                   /* Distance from top */
+  transform: translateX(12%); /* Center exactly */
   max-width: 80%;              /* Prevent stretching */
   line-height: 1.2;            /* Spacing between lines */
   z-index: 5;                  /* Keep it above background */
@@ -204,6 +207,7 @@ header {
 .overlay p { font-size: 18px; margin-bottom: 18px; }
 .btn { display: inline-block; padding: 12px 22px; border-radius: 25px; background: rgba(255,255,255,0.9); color: #222; text-decoration: none; font-weight: 700; margin: 6px; cursor: pointer; }
 .btn.disabled{background:rgba(200,200,200,0.7);cursor:default}
+
 /* Progress dots*/
 .progress { position: relative; right: 20px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 10; }
 .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.45); }
@@ -282,7 +286,7 @@ header {
     <div id="welcomeBox">
         <h2>To: <span id="guestNameDisplay"></span></h2>
         <div id="line"></div>
-        <p>Join us to celebrate!</p>
+        <p>Join us to celebrate our wedding!</p>
         <div id="line"></div>
         <button id="welcomeBtn">Let's Celebrate</button>
     </div>
@@ -293,7 +297,7 @@ header {
     <div class="slide">
         <img src="1.jpg" alt="">
         <div class="overlay">
-            <h2 id="welcome">"When you pass through the waters, I will be with you; and through the rivers, they shall not overwhelm you."</h2>
+            <h1 id="welcome">"So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate."(Matthew 19:6)</h1>
             <p id="groomsparents">Michel &amp; Nelly Khoueiry</p>
         </div>
     </div>
@@ -378,7 +382,7 @@ const guestName = decodeURIComponent(nomParam.replace(/\+/g," ")) || "Invité";
 
 // Language data
 const texts = {
-  fr: { welcome:`"When you pass through the waters, I will be with you; and through the rivers, they shall not overwhelm you"`,
+  fr: { welcome:`"So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate."(Matthew 19:6)`,
    groomsparents:'Michel & Nelly<br>   Khoueiry',
    names:"Wadih and caline",
    date:"Le 21 Août 2026 à Beyrouth",
@@ -393,9 +397,11 @@ const texts = {
    closeBtn:"Annuler",
    feedbackSending:"Envoi en cours...",
    feedbackSuccess:"Merci ! Votre confirmation a bien été envoyée.",
-   feedbackError:"Erreur lors de l'envoi. Réessayez." },
+   feedbackError:"Erreur lors de l'envoi. Réessayez.",
+    welcomeBoxTitle: "To: ",
+    welcomeBoxMessage: "Join us to celebrate!",},
 
-  ar: { welcome:`عندما تمرون بالمياه سأكون معكم، والأنهار لن تغرقك`,
+  ar: { welcome:" (إِذاً لَيْسَا بَعْدُ اثْنَيْنِ بَلْ جَسَدٌ وَاحِدٌ. فَالَّذِي جَمَعَهُ اللَّهُ لاَ يُفَرِّقُهُ إِنْسَانٌ(متى ١٩ :٦",
   groomsparents:"أنت مدعو لمشاركتنا هذه اللحظة المميزة",
   names:"وَدِيع وكالين",
   date:"٢١ أغسطس ٢٠٢٦ - بيروت",
@@ -410,9 +416,13 @@ const texts = {
   closeBtn:"إلغاء",
   feedbackSending:"جاري الإرسال...",
   feedbackSuccess:"شكراً! تم تسجيل تأكيدك.",
-  feedbackError:"حدث خطأ أثناء الإرسال. حاول مرة أخرى."
+  feedbackError:"حدث خطأ أثناء الإرسال. حاول مرة أخرى.",
+  welcomeBoxTitle: "إلى: ",
+   welcomeBoxMessage: "انضموا إلينا للاحتفال!",
+
   }
 };
+
 let lang = "fr";
 
 const el = id => document.getElementById(id);
@@ -440,6 +450,8 @@ const dots = document.querySelectorAll(".dot");
 
 function applyLang(){
   const t = texts[lang];
+ document.querySelector("#welcomeBox h2").innerText = t.welcomeBoxTitle + guestName;
+  document.querySelector("#welcomeBox p").innerText = t.welcomeBoxMessage;
   welcomeEl.innerText = t.welcome;
   groomsparentsEl.innerHTML = t.groomsparents;
   namesEl.innerText = t.names;
@@ -590,6 +602,7 @@ applyLang();
 </script>
 </body>
 </html>
+
 
 
 
