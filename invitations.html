@@ -169,28 +169,34 @@ header {
 /* Welcome quote at top center in italic */
 
 /* TOP CENTER QUOTE - second slide */
-#slider .slide.quote-slide #welcome {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-style: italic;
-  font-weight: 50;
-  font-size: 12px;
-  color: #fff;
-  max-width: 90%;
-  line-height: 1.4;
-  text-align: center;
-  word-wrap: break-word;
-  white-space: normal;
-  z-index: 10;
+/* QUOTE – TOP CENTER (RESPONSIVE & MOBILE SAFE) */
+.slide:first-child .overlay {
+  justify-content: flex-start; /* push content to top */
+  padding-top: 90px; /* space under navbar */
 }
+
+.slide:first-child #welcome {
+  position: relative;
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 400;
+  max-width: 90%;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Mobile fine-tuning */
 @media (max-width: 480px) {
-  #slider .slide.quote-slide #welcome {
-    font-size: 12px;
-    top: 15px;
+  .slide:first-child .overlay {
+    padding-top: 70px;
+  }
+
+  .slide:first-child #welcome {
+    font-size: 14px;
   }
 }
+
 
 /*#groomsparents {
   font-size: 15px;            /* Adjust size */
@@ -612,6 +618,7 @@ applyLang();
 </script>
 </body>
 </html>
+
 
 
 
