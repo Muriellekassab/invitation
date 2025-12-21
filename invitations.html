@@ -168,19 +168,30 @@ header {
 }
 /* Welcome quote at top center in italic */
 #welcome {
-  font-size: 15px;            /* Adjust size */
-  font-style: italic;          /* Italic text */
-  font-weight: 400;            /* Bold-ish */
-  text-align: center;          /* Center text */
-  color: #fff;                 /* White text */
-  position: relative;          /* Absolute positioning */
-  top: -100px;                   /* Distance from top */
-  transform: translateX(12%); /* Center exactly */
-  max-width: 80%;              /* Prevent stretching */
-  line-height: 1.2;            /* Spacing between lines */
-  z-index: 5;                  /* Keep it above background */
-  padding: 0 10px;             /* Padding for small screens */
+  font-size: 14px;            /* Slightly bigger for readability */
+  font-style: italic;         
+  font-weight: 400;           
+  text-align: center;         
+  color: #fff;                
+  position: absolute;         
+  top: 20px;                  /* distance from top */
+  left: 50%;                  
+  transform: translateX(-50%); /* true center horizontally */
+  max-width: 90%;             /* almost full width, so lines aren't broken too early */
+  line-height: 1.4;           
+  z-index: 5;                 
+  padding: 0 10px;            
+  word-wrap: break-word;      
+  white-space: normal;        /* allow wrapping naturally */
 }
+
+@media (max-width: 480px) {
+  #welcome {
+    font-size: 12px;          /* smaller font for very small screens */
+    top: 15px;                
+  }
+}
+
 #groomsparents {
   font-size: 15px;            /* Adjust size */
   font-style: auto;          /* Italic text */
@@ -602,6 +613,7 @@ applyLang();
 </script>
 </body>
 </html>
+
 
 
 
