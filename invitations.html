@@ -229,6 +229,7 @@ header { position: fixed;
 }
 
 /* Location buttons */
+
 .location-btn {
     background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(98,98,98,0.1)); /* light + dark gradient */
     backdrop-filter: blur(8px);
@@ -311,14 +312,19 @@ body.rtl .location-btn {
     }
 }
 @media (max-width: 768px) {
-    .location-btn {
-        min-width: 90px;
-        padding: 8px 12px;
-        font-size: 11px;
-        border-radius: 6px;
-    }
-}
 
+    .location-btn {
+        min-width: 70px;
+        padding: 6px 10px;
+        font-size: 9px;
+        border-radius: 5px;
+    }
+
+    .loc-1 { top: 16%; left: 68%; }
+    .loc-2 { top: 22%; left: 68%; }
+    .loc-3 { top: 28%; left: 68%; }
+    .loc-4 { top: 34%; left: 68%; }
+}
 @media(max-width:480px){ .overlay h2{font-size:26px} .overlay p{font-size:16px} }
 </style>
 </head>
