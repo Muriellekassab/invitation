@@ -12,7 +12,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body, html { height: auto;
   font-family: 'Georgia', 'Times New Roman',
-  serif; background: #000;
+  serif; background: rgb(240, 238, 233);
   color: #fff;
   overflow: auto; }
 
@@ -89,8 +89,8 @@ header { position: fixed;
 .slider { height: auto; overflow-y: hidden; scroll-snap-type: y mandatory; display: none; position: relative; z-index:1; }
 .slide { height: 100%; width: 100%; position: relative; scroll-snap-align: start; }
 .slide img { width: 100%; height: auto; object-fit: cover; object-position: center top; }
-.overlay { position: absolute; inset: 0; text-align: center; color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.overlay h2 { font-size: 32px; margin-bottom: 12px; }
+.overlay { position: absolute; inset: 0; text-align: center; color:rgb(67,18,24); padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.overlay h2 { font-size: 32px; margin-bottom: 12px;color:rgb(67,18,24); }
 .overlay p { font-size: 18px; margin-bottom: 200px; }
 .btn { display: inline-block; padding: 12px 22px; border-radius: 25px; background: rgba(255,255,255,0.9); color: #222; text-decoration: none; font-weight: 700; margin: 6px; cursor: pointer; }
 .btn.disabled{background:rgba(200,200,200,0.7);cursor:default}
@@ -149,7 +149,7 @@ header { position: fixed;
 /* RSVP buttons styling */
 #sendBtn, #notAttendBtn {
     background: #811C23;       /* deep red color */
-    color: #fff;               /* white text */
+    color:rgb(67,18,24);               /* white text */
     border: none;              /* remove default border */
     border-radius: 6px;        /* small rounded corners */
     padding: 10px 20px;        /* comfortable size */
@@ -171,7 +171,7 @@ header { position: fixed;
     font-family: 'Great Vibes', cursive;  /* same elegant script vibe */
     font-size: 36px;                       /* big but not overwhelming */
     font-weight: 200;
-    color: white;                        /* deep, warm color like your screenshot */
+    color:rgb(67,18,24);                        /* deep, warm color like your screenshot */
     letter-spacing: 1px;
     text-align: center;
     margin-bottom: 20px;
@@ -187,6 +187,7 @@ header { position: fixed;
 }
 
 .countdown {
+    color:rgb(67,18,24);
     display: flex;
     gap: 30px;
     margin-top: 30px;
@@ -195,7 +196,7 @@ header { position: fixed;
 
 .time-box {
     text-align: center;
-    color: #fff;
+    color:rgb(67,18,24);
 }
 
 .time-box span {
@@ -260,10 +261,10 @@ header { position: fixed;
 }
 
 /* Adjust these positions */
-.loc-1 { top:32%; left:67%; }
-.loc-2 { top: 44.5%; left: 67%; }
-.loc-3 { top: 56%; left: 67%; }
-.loc-4 { top: 67.5%; left: 67%; }
+.loc-1 { top:32%; left:67.5%; }
+.loc-2 { top: 44.5%; left: 67.5%; }
+.loc-3 { top: 56%; left: 67.5%; }
+.loc-4 { top: 67.5%; left: 67.5%; }
 
 /* RTL support */
 body.rtl .location-btn {
@@ -275,7 +276,7 @@ body.rtl .location-btn {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     font-weight: 500;
-    color: white;
+    color:rgb(240, 238, 233);
     padding: 18px 36px;
     min-width: 120px;       /* same width as location buttons */
     text-align: center;
@@ -295,6 +296,12 @@ body.rtl .location-btn {
     background: #F0EEE9;
     transform: translateY(-2px);
 }
+#rsvpBtn {
+    color: rgb(67,18,24) !important;
+}
+#whatsBtn {
+    color: rgb(67,18,24) !important;
+}
 #confirm {
     margin-bottom: 24px; /* add more space below the heading */
     font-size: 28px;     /* optional: make it a bit bigger for energy */
@@ -304,7 +311,7 @@ body.rtl .location-btn {
 /* Mobile */
 @media(max-width:480px){
     .countdown {
-        gap: 16px;
+        gap: 10px;
     }
     .time-box span {
         font-size: 34px;
@@ -422,7 +429,7 @@ body.rtl .location-btn {
 
         <div class="overlay">
             <h2 id="confirm">Say YES to love, fun, and cake!</h2>
-            <button id="rsvpBtn" class="frosted-btn">Confirm</button>
+            <button id="rsvpBtn" class="frosted-btn" >Confirm</button>
             <a id="whatsBtn" class="frosted-btn" href="#" target="_blank">WhatsApp</a>
         </div>
     </div>
