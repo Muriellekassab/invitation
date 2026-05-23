@@ -88,7 +88,7 @@ header { position: fixed;
 /* Slider */
 .slider { height: auto; overflow-y: hidden; scroll-snap-type: y mandatory; display: none; position: relative; z-index:1; }
 .slide { height: 100%; width: 100%; position: relative; scroll-snap-align: start; }
-.slide img { width: 100%; height: auto; object-fit: cover; object-position: center top; filter: brightness(65%); }
+.slide img { width: 100%; height: auto; object-fit: cover; object-position: center top; }
 .overlay { position: absolute; inset: 0; text-align: center; color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .overlay h2 { font-size: 32px; margin-bottom: 12px; }
 .overlay p { font-size: 18px; margin-bottom: 200px; }
@@ -233,16 +233,16 @@ header { position: fixed;
     background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(98,98,98,0.1)); /* light + dark gradient */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    font-weight: 500;
+    font-weight: 700;
     position: absolute;
     pointer-events: auto;
     color: #431218;
     padding: 18px 36px;          /* plump size */
-    min-width: 100px;
+    min-width: 220px;
     text-align: center;
     border-radius: 8px;         /* fully rounded */
     text-decoration: none;
-    font-size: 12px;
+    font-size: 18px;
     z-index: 10;
     transition: all 0.3s ease;
 
@@ -260,10 +260,10 @@ header { position: fixed;
 }
 
 /* Adjust these positions */
-.loc-1 { top:16%; left:70%; }
-.loc-2 { top: 22.5%; left: 70%; }
-.loc-3 { top: 28.5%; left: 70%; }
-.loc-4 { top: 34%; left: 70%; }
+.loc-1 { top:32%; left:70%; }
+.loc-2 { top: 44.5%; left: 70%; }
+.loc-3 { top: 56%; left: 70%; }
+.loc-4 { top: 67.5%; left: 70%; }
 
 /* RTL support */
 body.rtl .location-btn {
@@ -415,6 +415,7 @@ body.rtl .location-btn {
             </a>
 
         </div>
+    </div>
         <div class="slide">
             <img id="slide5Img" src="5eng.png" alt="">
 
