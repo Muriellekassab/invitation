@@ -1,269 +1,321 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Wadih & Caline's Wedding</title>
-    <!-- Bootstrap-->
-    <link href="https://fonts.google.com/specimen/Rubik+Scribble" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Courgette" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Rubik+Scribble&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+
     <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body, html { height: auto;
+  font-family: 'Georgia', 'Times New Roman',
+  serif; background: #000;
+  color: #fff;
+  overflow: auto; }
 
-* { box-sizing: border-box;
-  margin: 0;
-  padding: 0; }
+/* Navbar */
+header { position: fixed;
+        top: 0;
+        left: 0;
+         width: 100%;
+         z-index: 100; }
 
-body, html {
-    height: auto;
-    font-family: "Poppins", sans-serif;
-    background: #000;
-    color: #fff;
-    overflow: auto; }
-
-/* Navbar styles */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-}
-.navbar {
-  display: flex;
-  justify-content: space-between; /* Push brand to left, button to right */
-  align-items: center;
-  background: #EDE4D3;
-  padding: 15px 20px;
-}
-
-/* Brand */
 .navbar-brand {
     text-decoration: none; /* remove underline */
 }
-.navbar-brand h4 {
-  margin: 0;
-  font-style: italic;
-  color: #811C23;
-  font-weight: 600;
-}
-/* Add spacing between carousel dots */
-.carousel-indicators [data-bs-target] {
-  margin: 2 6px; /* Adjust the number for more or less spacing */
-}
-.container-fluid .mobile-menu-top {
-  position: relative;
-  z-index: 2;
-}
-#lang-toggle {
-  color: #811C23;
-  background: transparent;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-}
-#lang-toggle:hover {
-  text-decoration: underline;
-}
+.navbar { display: flex;
+         justify-content: space-between;
+          align-items: center;
+          background: rgb(240, 238, 233);
+          padding: 15px 20px; }
 
-/* Remove list styling if you kept <ul> */
-.navbar-nav {
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-}
-.navbar-nav li {
-  margin-left: 15px; /* spacing if needed */
-}
-/* ================= FIRST PAGE ================= */
+.navbar-brand h4 { margin: 0;
+            font-style: italic;
+             color: #811C23;
+              font-weight: 600; }
 
-#firstPage {
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  background: #EDE4D3; /* beige */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
 
-/* BLURRED BACKGROUND (fills sides)
-#firstPage::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("0.jpg") center / cover no-repeat;
-  filter: blur(30px);
-  transform: scale(1.15);
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 1s ease;
-} */
+#lang-toggle { color: #811C23;
+    background: transparent;
+    border: none;
+    font-weight: 600;
+     cursor: pointer; }
 
-/* FULL IMAGE (no crop, real colors) */
-#firstPage::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("0.jpg") center / cover no-repeat;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
+#lang-toggle:hover { text-decoration: underline; }
 
-/* BEIGE OVERLAY (on top of photo) */
-#firstPage .beige-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(237, 228, 211, 0.55); /* beige layer */
-  z-index: 2;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
+/* First Page */
+#firstPage { height: 100vh; position: relative; overflow: hidden; background: #F0EEE9; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+#firstPage::after { content: ""; position: absolute; inset: 0; background: url("page0.png") center / cover no-repeat; z-index: 1; opacity: 0; transition: opacity 1s ease; }
+#firstPage .beige-overlay { position: absolute; inset: 0; background: rgba(237, 228, 211, 0.55); z-index: 2; opacity: 0; transition: opacity 1s ease; }
+#firstPage.bg-photo::before, #firstPage.bg-photo::after, #firstPage.bg-photo .beige-overlay { opacity: 1; }
 
-/* Activated state */
-#firstPage.bg-photo::before,
-#firstPage.bg-photo::after,
-#firstPage.bg-photo .beige-overlay {
-  opacity: 1;
-}
-.heart {
-  font-size: 80px;
-  color: #811C23;
-  animation: beat 1s infinite alternate;
-  margin-bottom: 20px;
-  z-index: 5;
-}
+.heart { font-size: 80px; color: #811C23; animation: beat 1s infinite alternate; margin-bottom: 20px; z-index: 5; }
 @keyframes beat { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
 
-/* Welcome box */
-#welcomeBox {
-  width: 360px;
-  background: rgba(255,255,255,0.95);
-  color: #222;
-  padding: 20px 24px 24px 24px;
-  border-radius: 12px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease, transform 1s ease;
-  position: relative;
-  z-index: 5;
-}
+#welcomeBox { width: 360px; background: rgba(255,255,255,0.95); color: #222; padding: 20px 24px 24px 24px; border-radius: 12px; text-align: left; display: flex; flex-direction: column; opacity: 0; transform: translateY(20px); transition: opacity 1s ease, transform 1s ease; position: relative; z-index: 5; }
 #welcomeBox.show { opacity: 1; transform: translateY(0); }
-
 #line { height: 1px; background: #ccc; margin: 12px 0; width: 100%; }
-#welcomeBtn {
-  background:#EDE4D3;
-  color: #811C23;
-  font-weight: 700;
-  margin-top: auto;
-  align-self: flex-end;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-/* Welcome quote at top center in italic */
+#welcomeBtn { background:#F0EEE9; color: #811C23; font-weight: 700; margin-top: auto; align-self: flex-end; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+#welcomeBox h2 { font-size: 20px; margin-bottom: 12px; font-weight:600}
 
-/* TOP CENTER QUOTE - second slide */
-/* QUOTE – TOP CENTER (RESPONSIVE & MOBILE SAFE) */
-.slide:first-child .overlay {
-  justify-content: flex-start; /* push content to top */
-  padding-top: 90px; /* space under navbar */
+
+/* Welcome box container */
+#welcomeBox {
+    width: 360px;
+    background: rgba(255,255,255,0.95);
+    color: #222;
+    padding: 20px 24px 24px 24px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;   /* vertical stacking */
+    text-align: left;         /* default LTR */
 }
 
-.slide:first-child #welcome {
-  position: relative;
-  font-style: italic;
-  font-size: 16px;
-  font-weight: 400;
-  max-width: 90%;
-  line-height: 1.5;
-  text-align: center;
-  margin: 0 auto;
+/* Welcome box in RTL */
+#welcomeBox.rtl {
+    direction: rtl;
+    text-align: right;
+}
+#welcomeBox.rtl #welcomeBtn {
+    align-self: flex-end;   /* ← RIGHT for Arabic */
 }
 
-/* Mobile fine-tuning */
-@media (max-width: 480px) {
-  .slide:first-child .overlay {
-    padding-top: 70px;
-  }
-
-  .slide:first-child #welcome {
-    font-size: 14px;
-  }
-}
-
-
-/*#groomsparents {
-  font-size: 15px;            /* Adjust size */
-  font-style: auto;          /* Italic text */
-  font-weight: 400;            /* Bold-ish */
-  text-align: left;          /* Center text */
-  color: #fff;                 /* White text */
-  position: relative;          /* Absolute positioning */
-  top: -50px;                   /* Distance from top */
-  left: 25%;                   /* Center horizontally */
-  transform: translateX(-25%); /* Center exactly */
-  max-width: 80%;              /* Prevent stretching */
-  line-height: 1.2;            /* Spacing between lines */
-  z-index: 5;                  /* Keep it above background */
-  padding: 0 10px;             /* Padding for small screens */
-}*/
 
 
 /* Slider */
-.slider { height: auto; overflow-y: hidden; scroll-snap-type: y mandatory; display: none;position: relative;z-index:1;  }
+.slider { height: auto; overflow-y: hidden; scroll-snap-type: y mandatory; display: none; position: relative; z-index:1; }
 .slide { height: 100%; width: 100%; position: relative; scroll-snap-align: start; }
-.slide img { width: 100%; height: auto; object-fit: cover; object-position: center top; filter: brightness(65%);  }
+.slide img { width: 100%; height: auto; object-fit: cover; object-position: center top; filter: brightness(65%); }
 .overlay { position: absolute; inset: 0; text-align: center; color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .overlay h2 { font-size: 32px; margin-bottom: 12px; }
-.overlay p { font-size: 18px; margin-bottom: 12px; }
+.overlay p { font-size: 18px; margin-bottom: 200px; }
 .btn { display: inline-block; padding: 12px 22px; border-radius: 25px; background: rgba(255,255,255,0.9); color: #222; text-decoration: none; font-weight: 700; margin: 6px; cursor: pointer; }
 .btn.disabled{background:rgba(200,200,200,0.7);cursor:default}
 
-/* Progress dots*/
+#slide1Img + .overlay {
+    display: none;
+}
+#slide2Img + .overlay {
+    display: none;
+}
+.hidden-text {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+}
+
+.location-overlay {
+    display: block !important;
+}
+
+/* Progress dots */
 .progress { position: relative; right: 20px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 10; }
 .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.45); }
 .dot.active { background: #fff; }
 
-
 /* Modal */
 .modal-back { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 9999; }
-.modal { background: #fff; color: #222; padding: 20px; border-radius: 12px; max-width: 420px; width: 92%; }
+.modal { background: #fff; color: #222; padding: 20px; border-radius: 12px; max-width: 420px; width: 92%; position: relative; }
 .modal h3 { margin-bottom: 8px; }
-.modal input, .modal select, .modal textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-  }
-
-  .close {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    font-size: 22px;
-    cursor: pointer;
-    color: #888;
-  }
-
-  .close:hover {
-    color: #000;
-  }
+.modal input, .modal select, .modal textarea { width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ddd; border-radius: 8px; }
+.close { position: absolute; right: 15px; top: 10px; font-size: 22px; cursor: pointer; color: #888; }
+.close:hover { color: #000; }
 .field { margin: 10px 0; }
 .field label { display: block; font-size: 14px; margin-bottom: 6px; }
 .field input[type="text"], .field input[type="number"] { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
 .row { display: flex; gap: 8px; }
 .rtl{direction:rtl;font-family:"Amiri",serif}
 
-#rsvpBtn, #sendBtn, #closeBtn {
-    pointer-events: auto !important;
-    z-index: 1061 !important;
+.close {
+    position: absolute;
+    top: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+    transition: all 0.3s ease;
+}
+.close:hover { color: #000; }
+
+/* positions for languages */
+.close.fr { right: 15px; left: auto; }
+.close.ar { left: 15px; right: auto; }
+
+
+/* RSVP buttons styling */
+#sendBtn, #notAttendBtn {
+    background: #811C23;       /* deep red color */
+    color: #fff;               /* white text */
+    border: none;              /* remove default border */
+    border-radius: 6px;        /* small rounded corners */
+    padding: 10px 20px;        /* comfortable size */
+    flex: 1;                   /* take equal space in row */
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Hover effect */
+#sendBtn:hover, #notAttendBtn:hover {
+    background: #a72c36;       /* lighter red on hover */
+    transform: translateY(-2px); /* small lift effect */
+}
+
+/* Countdown title style */
+#countdownTitle {
+    font-family: 'Great Vibes', cursive;  /* same elegant script vibe */
+    font-size: 36px;                       /* big but not overwhelming */
+    font-weight: 200;
+    color: white;                        /* deep, warm color like your screenshot */
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);  /* soft shadow for elegance */
+}
+
+/* Bigger on desktop/laptop */
+@media (min-width: 1024px) {
+    #countdownTitle {
+        font-size: 48px;
+        margin-bottom: 35px;
+    }
+}
+
+.countdown {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    font-style: italic;
+}
+
+.time-box {
+    text-align: center;
+    color: #fff;
+}
+
+.time-box span {
+    font-size: 48px;
+    font-weight: 600;
+    display: block;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+}
+
+.time-box small {
+    font-size: 14px;
+    letter-spacing: 1px;
+    opacity: 0.9;
+}
+
+.countdown-sub {
+    font-family: 'Great Vibes', cursive;
+    font-size: 48px;      /* base font size */
+    display: block;
+    margin-top: 60px;
+    opacity: 0.9;
+    transform: scale(1.5); /* visually enlarge it */
+}
+
+/* Slide 2 location overlay */
+.location-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none; /* allow image swipe */
+}
+
+/* Location buttons */
+.location-btn {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(98,98,98,0.1)); /* light + dark gradient */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-weight: 700;
+    position: absolute;
+    pointer-events: auto;
+    color: #431218;
+    padding: 18px 36px;          /* plump size */
+    min-width: 220px;
+    text-align: center;
+    border-radius: 8px;         /* fully rounded */
+    text-decoration: none;
+    font-size: 18px;
+    z-index: 10;
+    transition: all 0.3s ease;
+
+    /* 3D effect */
+    box-shadow:
+        0 8px 15px rgba(0,0,0,0.1),  /* main shadow */
+        inset 0 2px 4px rgba(255,255,255,0.2), /* top highlight */
+        inset 0 -2px 4px rgba(0,0,0,0.1);     /* bottom shading */
+}
+
+
+.location-btn:hover {
+    background: #F0EEE9;
+    transform: translateY(-2px);
+}
+
+/* Adjust these positions */
+.loc-1 { top:16%; left:70%; }
+.loc-2 { top: 22.5%; left: 70%; }
+.loc-3 { top: 28.5%; left: 70%; }
+.loc-4 { top: 34%; left: 70%; }
+
+/* RTL support */
+body.rtl .location-btn {
+    direction: rtl;
+}
+/* Make RSVP & WhatsApp buttons like location buttons */
+.frosted-btn {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(98,98,98,0.1));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-weight: 500;
+    color: white;
+    padding: 18px 36px;
+    min-width: 220px;       /* same width as location buttons */
+    text-align: center;
+    border-radius: 8px;
+    font-size: 18px;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow:
+        0 8px 15px rgba(0,0,0,0.1),
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        inset 0 -2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.frosted-btn:hover {
+    background: #F0EEE9;
+    transform: translateY(-2px);
+}
+#confirm {
+    margin-bottom: 24px; /* add more space below the heading */
+    font-size: 28px;     /* optional: make it a bit bigger for energy */
+    text-align: center;  /* center the heading */
+}
+
+/* Mobile */
+@media(max-width:480px){
+    .countdown {
+        gap: 16px;
+    }
+    .time-box span {
+        font-size: 34px;
+    }
+}
+@media (max-width: 768px) {
+    .location-btn {
+        min-width: 180px;
+        font-size: 14px;
+        padding: 14px 20px;
+    }
 }
 
 @media(max-width:480px){ .overlay h2{font-size:26px} .overlay p{font-size:16px} }
@@ -271,72 +323,105 @@ header {
 </head>
 <body>
 
-<!--<header>
-    <nav id="navbar-top" class="navbar navbar-expand-lg navbar-dark py-0">
-        <div class="container-fluid mobile-menu-top">
-            <a class="navbar-brand logo py-0" href="#">
-                <h4 class="font-whiteangelica">W &amp; C</h4>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav">
-                <img src="https://cdn-icons-png.flaticon.com/512/56/56763.png" style="width:24px;" alt="toggle">
-            </button>
-            <div class="collapse navbar-collapse" id="main-nav">
-                <ul class="navbar-nav ms-auto font-playfair">
-                    <li class="nav-item">
-                        <button id="lang-toggle" class="nav-link btn btn-link">FR / العربية</button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>-->
 <header>
     <nav class="navbar">
         <a class="navbar-brand" href="#"><h4>W & C</h4></a>
-        <button id="lang-toggle">FR / العربية</button>
+        <button id="lang-toggle">EN / العربية</button>
     </nav>
 </header>
 
-<!-- FIRST PAGE -->
-<div  id="firstPage">
+<div id="firstPage">
     <div class="heart">❤</div>
     <div id="welcomeBox">
         <h2>To: <span id="guestNameDisplay"></span></h2>
         <div id="line"></div>
-        <p>Join us to celebrate our wedding!</p>
+        <p>Join us in making memories together!</p>
         <div id="line"></div>
         <button id="welcomeBtn">Let's Celebrate</button>
     </div>
 </div>
 
-<!-- SLIDES -->
 <div class="slider" id="slider">
     <div class="slide">
-        <img src="1.jpg" alt="">
+        <img id="slide1Img" src="1eng.png" alt="">
         <div class="overlay">
-            <p id="welcome">"So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate."(Matthew 19:6)</p>
+            <p id="slide1Text"></p>
         </div>
     </div>
     <div class="slide">
-        <img src="2.jpg" alt="">
-        <div class="overlay">
-            <h2 id="names">Wadih & Caline</h2>
-            <h2 id="date">Le 21 Août 2026 à Beyrouth</h2>
+        <img id="slide2Img" src="2eng.png" alt="">
+
+        <div class="overlay location-overlay">
+            <h2 id="names" class="hidden-text">Wadih & Caline</h2>
+            <h2 id="date" class="hidden-text">Le 21 Août 2026 à Beyrouth</h2>
         </div>
     </div>
+
     <div class="slide">
-        <img src="3.jpg" alt="">
+        <img id="slide3Img" src="3eng.png" alt="">
         <div class="overlay">
-            <h2 id="countdownTitle">wedding day in ...</h2>
-            <p id="countdownTimer"></p>
+            <h2 id="countdownTitle">Not long to go...</h2>
+
+            <div class="countdown">
+                <div class="time-box">
+                    <span id="days">0</span>
+                    <small>Days</small>
+                </div>
+                <div class="time-box">
+                    <span id="hours">0</span>
+                    <small>Hours</small>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">0</span>
+                    <small>Minutes</small>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">0</span>
+                    <small>Seconds</small>
+                </div>
+            </div>
+
+            <p class="countdown-sub">…Until we become one!</p>
         </div>
     </div>
+
     <div class="slide">
-        <img src="4.jpg" alt="">
+        <img id="slide4Img" src="4eng.png" alt="">
+        <div class="overlay location-overlay">
+
+            <!-- LOCATION BUTTONS -->
+            <a href="https://maps.app.goo.gl/TefiLjVbbx3hMWkW9?g_st=ic"
+               target="_blank"
+               class="location-btn loc-1">
+                Location
+            </a>
+
+            <a href="https://maps.app.goo.gl/NbN4v2SCMpiA7nu68?g_st=iwb"
+               target="_blank"
+               class="location-btn loc-2">
+                Location
+            </a>
+
+            <a href="https://maps.app.goo.gl/Pdtw95Z3wEoK9u2W7?g_st=ipc"
+               target="_blank"
+               class="location-btn loc-3">
+                Location
+            </a>
+
+            <a href="https://maps.app.goo.gl/kzRryAgZ5JY3EABk8?g_st=ic"
+               target="_blank"
+               class="location-btn loc-4">
+                Location
+            </a>
+
+        </div>
+        <div class="slide">
+            <img id="slide5Img" src="5eng.png" alt="">
+
         <div class="overlay">
-            <h2 id="confirm">Confirmez votre présence</h2>
-            <button id="rsvpBtn" class="btn">Je confirme ma présence</button>
-            <a id="whatsBtn" class="btn" href="#" target="_blank">💬 WhatsApp</a>
+            <h2 id="confirm">Say YES to love, fun, and cake!</h2>
+            <button id="rsvpBtn" class="frosted-btn">Confirm</button>
+            <a id="whatsBtn" class="frosted-btn" href="#" target="_blank">WhatsApp</a>
         </div>
     </div>
 </div>
@@ -346,95 +431,101 @@ header {
     <div class="dot"></div>
     <div class="dot"></div>
     <div class="dot"></div>
-    <div class="dot"></div>
 </div>
 
-<!-- Modal RSVP -->
+<!-- Modal -->
 <div class="modal-back" id="modalBack">
-    <div class="modal" id="modal">
-        <h3 id="modalTitle">Confirmer votre présence</h3>
-
+    <div class="modal">
+        <span class="close" id="closeBtn">&times;</span>
+        <h3 id="modalTitle">Confirm your presence</h3>
         <div class="field">
-            <label id="labelName">Nom</label>
+            <label id="labelName">Name</label>
             <input type="text" id="guestName" readonly>
         </div>
-
         <div class="field">
-            <label id="labelCount">Nombre de personnes</label>
-            <input type="number" id="count" min="1" value="1">
+            <label id="labelCount">Number of persons attending</label>
+            <input type="number" id="count" min="1" placeholder="Enter number of guests" required>
         </div>
-
         <div class="field">
-            <label id="labelMessage">Message (optionnel)</label>
+            <label id="labelMessage">Message (optional)</label>
             <input type="text" id="message" placeholder="">
         </div>
-
         <div class="row">
-            <button id="sendBtn" class="btn">Envoyer</button>
-            <button id="closeBtn" class="btn">Annuler</button>
+            <button id="sendBtn" class="btn" style="background:#811C23;color:white;">Will Attend</button>
+            <button id="notAttendBtn" class="btn" style="background:#811C23;color:white;">Cannot Attend</button>
         </div>
-
         <p id="feedback" style="margin-top:10px;font-size:14px"></p>
     </div>
 </div>
 
 <audio id="audio" loop>
     <source src="musique.mp3" type="audio/mpeg">
-    Votre navigateur ne supporte pas l'audio.
 </audio>
 
 <script>
+function toArabicNumber(num) {
+    return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+}
+
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjkaqovv";
 const WHATS_NUMBER = "14387256675";
-const WHATS_TEXT_FR = "Je confirme ma présence";
+const WHATS_TEXT_FR = "We confirm our presence";
 const WHATS_TEXT_AR = "أؤكد حضوري";
 
-// Guest name
 const params = new URLSearchParams(window.location.search);
-//const guestName = decodeURIComponent((params.get("nom") || "Invité").replace(/\+/g," "));
-//document.getElementById("guestNameDisplay").innerText = guestName;
 const nomParam = params.get("nom") || "";
 const guestName = decodeURIComponent(nomParam.replace(/\+/g," ")) || "Invité";
 
-// Language data
 const texts = {
-  fr: { welcome:`"So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate."(Matthew 19:6)`,
-   groomsparents:'Michel & Nelly<br>   Khoueiry',
-   names:"Wadih and caline",
-   date:"Le 21 Août 2026 à Beyrouth",
-   confirm:"Confirmez votre présence",
-   rsvpBtn:"Je confirme ma présence",
-   whatsBtn:"💬 WhatsApp",
-   modalTitle:"Confirmer votre présence",
-   labelName:"Nom",
-   labelCount:"Nombre de personnes",
-   labelMessage:"Message (optionnel)",
-   sendBtn:"Envoyer",
-   closeBtn:"Annuler",
-   feedbackSending:"Envoi en cours...",
-   feedbackSuccess:"Merci ! Votre confirmation a bien été envoyée.",
-   feedbackError:"Erreur lors de l'envoi. Réessayez.",
+  fr: {
+    welcome: `"So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate."(Matthew 19:6)`,
+    names: "Wadih & Caline",
+    date: "Le 21 Août 2026 à Beyrouth",
+    confirm: "Say YES to love, fun, and cake!",
+    rsvpBtn: "Say YES to love, fun, and cake!",
+    whatsBtn: "WhatsApp",
+    modalTitle: "Confirm your presence",
+    labelName: "Name",
+    labelCount: "Number of persons attending",
+    labelMessage: "Message (optional)",
+    sendBtn: "Confirm",
+    notAttendBtn: "Not able to attend",
+    closeBtn: "x",
     welcomeBoxTitle: "To: ",
-    welcomeBoxMessage: "Join us to celebrate!",},
-
-  ar: { welcome:" (إِذاً لَيْسَا بَعْدُ اثْنَيْنِ بَلْ جَسَدٌ وَاحِدٌ. فَالَّذِي جَمَعَهُ اللَّهُ لاَ يُفَرِّقُهُ إِنْسَانٌ(متى ١٩ :٦",
-  groomsparents:"أنت مدعو لمشاركتنا هذه اللحظة المميزة",
-  names:"وَدِيع وكالين",
-  date:"٢١ أغسطس ٢٠٢٦ - بيروت",
-  confirm:"يرجى تأكيد الحضور",
-  rsvpBtn:"أؤكد حضوري",
-  whatsBtn:"💬 واتساب",
-  modalTitle:"تأكيد الحضور",
-  labelName:"الاسم",
-  labelCount:"عدد الأشخاص",
-  labelMessage:"رسالة (اختياري)",
-  sendBtn:"إرسال",
-  closeBtn:"إلغاء",
-  feedbackSending:"جاري الإرسال...",
-  feedbackSuccess:"شكراً! تم تسجيل تأكيدك.",
-  feedbackError:"حدث خطأ أثناء الإرسال. حاول مرة أخرى.",
-  welcomeBoxTitle: "إلى: ",
-   welcomeBoxMessage: "انضموا إلينا للاحتفال!",
+    welcomeBoxMessage: "Join us to celebrate!",
+    welcomeBoxbtn:"Let's Celebrate",
+    feedbackSending: "Sending your message...",
+    feedbackSuccess: "Thankyou! Your message was successfully sent.",
+    feedbackError: "Error  your message didn't go.Please try again.",
+    countdownDays: "Days",
+    countdownHours: "Hours",
+    countdownMinutes: "Minutes",
+    countdownSeconds: "Seconds",
+  },
+  ar: {
+    welcome: " (إِذاً لَيْسَا بَعْدُ اثْنَيْنِ بَلْ جَسَدٌ وَاحِدٌ. فَالَّذِي جَمَعَهُ اللَّهُ لاَ يُفَرِّقُهُ إِنْسَانٌ(متى ١٩ :٦",
+    names: "وَدِيع وكالين",
+    date: "٢١ أغسطس ٢٠٢٦ - بيروت",
+    confirm: "يرجى تأكيد الحضور",
+    rsvpBtn: "أؤكد حضوري",
+    whatsBtn: " واتساب",
+    modalTitle: "تأكيد الحضور",
+    labelName: "الاسم",
+    labelCount: "عدد الأشخاص",
+    labelMessage: "رسالة (اختياري)",
+    sendBtn: "تأكيد الحضور",
+    notAttendBtn:"تأكيد عدم الحضور",
+    closeBtn: "x",
+    welcomeBoxTitle: "إلى: ",
+    welcomeBoxMessage: "انضموا إلينا للاحتفال!",
+    welcomeBoxbtn:"فلنحتفل معاً",
+    feedbackSending: "جاري الإرسال...",
+    feedbackSuccess: "شكراً! تم  تأكيدك.",
+    feedbackError: "حدث خطأ أثناء الإرسال. حاول مرة أخرى.",
+    countdownDays: " يوم",
+    countdownHours: "ساعة",
+    countdownMinutes: "دقيقة",
+    countdownSeconds: "ثانية",
 
   }
 };
@@ -442,8 +533,8 @@ const texts = {
 let lang = "fr";
 
 const el = id => document.getElementById(id);
-const welcomeEl = el("welcome");
-const groomsparentsEl = el("groomsparents");
+
+const welcomeEl = el("slide1Text");
 const namesEl = el("names");
 const dateEl = el("date");
 const confirmEl = el("confirm");
@@ -455,171 +546,226 @@ const guestNameInput = el("guestName");
 const countInput = el("count");
 const messageInput = el("message");
 const sendBtn = el("sendBtn");
+const notAttendBtn = el("notAttendBtn");
 const closeBtn = el("closeBtn");
 const feedback = el("feedback");
 const modalTitle = el("modalTitle");
-const labelName = el("labelName");
-const labelCount = el("labelCount");
-const labelMessage = el("labelMessage");
-const slider = el("slider");
-const dots = document.querySelectorAll(".dot");
-
 function applyLang(){
   const t = texts[lang];
- document.querySelector("#welcomeBox h2").innerText = t.welcomeBoxTitle + guestName;
+
+  // Welcome box
+  document.querySelector("#welcomeBox h2").innerText = t.welcomeBoxTitle + guestName;
   document.querySelector("#welcomeBox p").innerText = t.welcomeBoxMessage;
+  document.querySelector("#welcomeBtn ").innerText = t.welcomeBoxbtn;
+
+  const welcomeBox = document.getElementById("welcomeBox");
+  if(lang === "ar"){
+      document.body.classList.add("rtl");   // global RTL
+      welcomeBox.classList.add("rtl");      // welcome box RTL
+      welcomeBtn.classList.add("rtl")
+  } else {
+      document.body.classList.remove("rtl");
+      welcomeBox.classList.remove("rtl");
+      welcomeBtn.classList.remove("rtl")
+  }
+
+  // Slider texts
   welcomeEl.innerText = t.welcome;
-  groomsparentsEl.innerHTML = t.groomsparents;
   namesEl.innerText = t.names;
   dateEl.innerText = t.date;
   confirmEl.innerText = t.confirm;
+
   modalTitle.innerText = t.modalTitle;
-  labelName.innerText = t.labelName;
-  labelCount.innerText = t.labelCount;
-  labelMessage.innerText = t.labelMessage;
+  el("labelName").innerText = t.labelName;
+  el("labelCount").innerText = t.labelCount;
+  el("labelMessage").innerText = t.labelMessage;
   sendBtn.innerText = t.sendBtn;
+  notAttendBtn.innerText = t.notAttendBtn;
   closeBtn.innerText = t.closeBtn;
-  feedback.innerText = "";
-  document.body.classList.toggle("rtl", lang==="ar");
+
+  // **Countdown texts**
+  document.getElementById("countdownTitle").innerText = lang === "ar" ? "لم يتبقى الكثير..." : "Not long to go...";
+  document.querySelector(".countdown-sub").innerText = lang === "ar" ? "… حتى نصبح شخصاواحداً !" : "…Until we become one!";
+
+  // WhatsApp link
   const text = lang==="fr"?WHATS_TEXT_FR:WHATS_TEXT_AR;
-  whatsBtn.href = `https://wa.me/14387257765?text=${encodeURIComponent(text + " - " + guestName)}`;
+  whatsBtn.href = `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(text + " - " + guestName)}`;
   guestNameInput.value = guestName;
-  updateRsvpButton();
+
+  // First slide image
+  el("slide1Img").src = lang==="ar" ? "1ar.png" : "1eng.png";
+  el("slide2Img").src = (lang==="ar") ? "2ar.png" : "2eng.png";
+    el("slide3Img").src = lang==="ar" ? "3ar.png" : "3eng.png";
+  el("slide4Img").src = (lang==="ar") ? "4ar.png" : "4eng.png";
+
+  const closeBtnEl = el("closeBtn");
+  closeBtnEl.classList.toggle("fr", lang === "fr");
+  closeBtnEl.classList.toggle("ar", lang === "ar");
 }
 
-//const el = id => document.getElementById(id);
-//function applyLang(){
- // const t = texts[lang];
- // el("welcome").innerText=t.welcome;
-  //el("groomsparents").innerHTML=t.groomsparents;
-  //el("names").innerText=t.names;
-  //el("date").innerText=t.date;
-  //el("confirm").innerText=t.confirm;
-  //el("modalTitle").innerText=t.modalTitle;
-  //el("guestName").value=guestName;
- //el("rsvpBtn").innerText=t.rsvpBtn;
-  //el("whatsBtn").innerText=t.whatsBtn;
-  //el("labelName").innerText=t.labelName;
-  //el("labelCount").innerText=t.labelCount;
-  //el("labelMessage").innerText=t.labelMessage;
-  //el("sendBtn").innerText=t.sendBtn;
-  //el("closeBtn").innerText=t.closeBtn;
-  //el("whatsBtn").href=`https://wa.me/14387256675?text=${encodeURIComponent(t.rsvpBtn+" - "+guestName)}`;
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-//applyLang();
-
-// Lang toggle
-//document.getElementById("lang-toggle").addEventListener("click",()=>{ lang = lang==="fr"?"ar":"fr"; applyLang(); });
-langToggle.addEventListener("click", ()=>{lang = (lang==="fr"?"ar":"fr"); applyLang();});
-rsvpBtn.addEventListener("click", ()=>{modalBack.style.display="flex"; applyLang();});
-closeBtn.addEventListener("click", ()=>{modalBack.style.display="none"; feedback.innerText="";});
-
-//button doesnt disable after rsvp
-function updateRsvpButton(){
-  const t = texts[lang];
-  rsvpBtn.innerText = t.rsvpBtn;
-}
-
-// Send RSVP
-sendBtn.addEventListener("click", async ()=>{
-  const t = texts[lang];
-  feedback.style.color="#333";
-  feedback.innerText=t.feedbackSending;
-
-  const payload = {
-    "nom": guestNameInput.value,
-    "nombre_personnes": countInput.value,
-    "message": messageInput.value || "",
-    "langue": lang,
-    "date_reponse": new Date().toISOString()
-  };
-
-  try{
-    const res = await fetch(FORMSPREE_ENDPOINT,{
-      method:"POST",
-      headers:{"Accept":"application/json","Content-Type":"application/json"},
-      body:JSON.stringify(payload)
-    });
-
-    if(res.ok){
-      feedback.style.color="green";
-      feedback.innerText=t.feedbackSuccess;
-      localStorage.setItem('rsvp_status_'+guestName,'confirmed');
-      updateRsvpButton();
-      setTimeout(()=>{modalBack.style.display="none";},1600);
-    } else {
-      feedback.style.color="crimson";
-      feedback.innerText=t.feedbackError;
-    }
-  } catch(err){
-    feedback.style.color="crimson";
-    feedback.innerText=t.feedbackError;
-    console.error(err);
-  }
+langToggle.addEventListener("click", ()=>{
+    lang = lang==="fr"?"ar":"fr";
+    applyLang();
 });
 
-// Progress dots
-//const slider = el("slider");
-//const dots = document.querySelectorAll(".dot");
-slider.addEventListener("scroll", ()=>{
-  const idx = Math.round(slider.scrollTop/window.innerHeight);
-  dots.forEach((d,i)=>d.classList.toggle("active",i===idx));
-});
-
-// Show welcome box after 2s
-setTimeout(()=>{
-  document.getElementById("welcomeBox").classList.add("show");
-  document.querySelector(".heart").style.display="none";
-  document.getElementById("firstPage").classList.add("bg-photo");
-},2000);
-
-// Let's celebrate button
-document.getElementById("welcomeBtn").addEventListener("click",()=>{
+// Let's Celebrate button
+document.getElementById("welcomeBtn").addEventListener("click", ()=>{
     document.getElementById("welcomeBox").style.display = "none";
     document.querySelector(".heart").style.display = "none";
-
-    // Show the slider on top
     document.getElementById("slider").style.display = "block";
-
-    // Allow scrolling on the body
     document.body.style.overflow = "auto";
     el("audio").play().catch(err=>console.log("Autoplay blocked:",err));
 });
 
+// Show welcome box after 2s
+setTimeout(()=>{
+    document.getElementById("welcomeBox").classList.add("show");
+    document.querySelector(".heart").style.display="none";
+    document.getElementById("firstPage").classList.add("bg-photo");
+},2000);
+
+// Close modal
+closeBtn.addEventListener("click", ()=>{ modalBack.style.display="none"; feedback.innerText=""; });
+rsvpBtn.addEventListener("click", ()=>{ modalBack.style.display="flex"; applyLang(); });
+
+// Send RSVP
+sendBtn.addEventListener("click", async ()=>{
+    const t = texts[lang];
+    feedback.style.color="#333";
+
+    const guestCount = countInput.value.trim(); // get value
+
+    // Check if number is valid
+    if(!guestCount || isNaN(guestCount) || parseInt(guestCount) < 1){
+        feedback.style.color = "crimson";
+        feedback.innerText = lang === "fr" ? "Please enter a valid number of guests." : "يرجى إدخال عدد الأشخاص بشكل صحيح.";
+        return; // stop execution
+    }
+
+    feedback.innerText = t.feedbackSending;
+
+    const payload = {
+        "nom": guestNameInput.value,
+        "nombre_personnes": parseInt(guestCount),
+        "message": messageInput.value || "",
+        "langue": lang,
+        "date_reponse": new Date().toISOString()
+    };
+
+    try{
+        const res = await fetch(FORMSPREE_ENDPOINT,{
+            method:"POST",
+            headers:{"Accept":"application/json","Content-Type":"application/json"},
+            body:JSON.stringify(payload)
+        });
+        if(res.ok){
+            feedback.style.color="green";
+            feedback.innerText=t.feedbackSuccess;
+            setTimeout(()=>{modalBack.style.display="none";},1600);
+        } else {
+            feedback.style.color="crimson";
+            feedback.innerText=t.feedbackError;
+        }
+    } catch(err){
+        feedback.style.color="crimson";
+        feedback.innerText=t.feedbackError;
+        console.error(err);
+    }
+});
+
+
+// Not attending
+notAttendBtn.addEventListener("click", async ()=>{
+    const t = texts[lang];
+    feedback.style.color="#333";
+    feedback.innerText = t.feedbackSending;
+
+    // Use the message input if something is written, otherwise default to "I am not able to attend"
+    const userMessage = messageInput.value.trim() || "I am not able to attend";
+
+    const payload = {
+        "nom": guestNameInput.value,
+        "nombre_personnes": 0,
+        "message": userMessage,
+        "langue": lang,
+        "date_reponse": new Date().toISOString()
+    };
+
+    try {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+            method: "POST",
+            headers: {"Accept":"application/json","Content-Type":"application/json"},
+            body: JSON.stringify(payload)
+        });
+
+        if(res.ok){
+            feedback.style.color="green";
+            feedback.innerText=t.feedbackSuccess;
+            setTimeout(()=>{ modalBack.style.display="none"; }, 1600);
+        } else {
+            feedback.style.color="crimson";
+            feedback.innerText=t.feedbackError;
+        }
+    } catch(err){
+        feedback.style.color="crimson";
+        feedback.innerText=t.feedbackError;
+        console.error(err);
+    }
+});
+
 // Countdown
-const weddingDate = new Date("2026-08-21T18:00:00");
-function updateCountdown(){
-  const now = new Date();
-  const diff = weddingDate - now;
-  if(diff<=0){el("countdownTimer").innerText=lang==="fr"?"Le mariage est arrivé!":"لقد وصل موعد الزفاف!";return;}
-  const days=Math.floor(diff/(1000*60*60*24));
-  const hours=Math.floor((diff/(1000*60*60))%24);
-  const minutes=Math.floor((diff/(1000*60))%60);
-  const seconds=Math.floor((diff/1000)%60);
-  el("countdownTimer").innerText=`${days}days ${hours}h ${minutes}m ${seconds}s`;
+// Countdown (styled)
+// Helper: Convert numbers to Arabic numerals
+function toArabicNumber(num) {
+    return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
 }
-setInterval(updateCountdown,1000);
+
+
+// Countdown logic
+const weddingDate = new Date("2026-08-21T18:00:00");
+
+function updateCountdown() {
+    const now = new Date();
+    const diff = weddingDate - now;
+
+    if(diff <= 0){
+        document.querySelector(".countdown").innerHTML =
+            `<span style="font-size:28px">💍 ${lang==="fr"?"C’est le grand jour !":"اليوم هو يوم الزفاف!"}</span>`;
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    // Update numbers with Arabic numerals if needed
+    if(lang === "ar") {
+        document.getElementById("days").innerText = toArabicNumber(days);
+        document.getElementById("hours").innerText = toArabicNumber(hours);
+        document.getElementById("minutes").innerText = toArabicNumber(minutes);
+        document.getElementById("seconds").innerText = toArabicNumber(seconds);
+    } else {
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+    }
+
+    // Update the small labels
+    document.querySelector("#days + small").innerText = texts[lang].countdownDays;
+    document.querySelector("#hours + small").innerText = texts[lang].countdownHours;
+    document.querySelector("#minutes + small").innerText = texts[lang].countdownMinutes;
+    document.querySelector("#seconds + small").innerText = texts[lang].countdownSeconds;
+}
+
+// Run countdown every second
+setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Init
-applyLang();
+// Update countdown text on language switch
+updateCountdownTextLang();
+
 </script>
 </body>
 </html>
-
-
-
-
-
