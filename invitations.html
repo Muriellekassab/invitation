@@ -563,7 +563,9 @@ function applyLang(){
   const t = texts[lang];
 
   // Welcome box
-  document.querySelector("#welcomeBox h2").innerText = t.welcomeBoxTitle + guestName;
+  document.getElementById("guestNameDisplay").innerText = guestName;
+  document.querySelector("#welcomeBox h2").childNodes[0].nodeValue = t.welcomeBoxTitle;
+ // document.querySelector("#welcomeBox h2").innerText = t.welcomeBoxTitle + guestName;
   document.querySelector("#welcomeBox p").innerText = t.welcomeBoxMessage;
   document.querySelector("#welcomeBtn ").innerText = t.welcomeBoxbtn;
 
