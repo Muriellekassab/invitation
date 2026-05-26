@@ -563,8 +563,8 @@ function applyLang(){
   const t = texts[lang];
 
   // Welcome box
-  document.getElementById("guestNameDisplay").innerText = guestName;
-  //document.querySelector("#welcomeBox h2").innerText = t.welcomeBoxTitle + guestName;
+
+document.getElementById("guestNameDisplay").innerText = guestName;
   document.querySelector("#welcomeBox p").innerText = t.welcomeBoxMessage;
   document.querySelector("#welcomeBtn ").innerText = t.welcomeBoxbtn;
 
@@ -775,7 +775,9 @@ updateCountdown();
 
 // Update countdown text on language switch
 updateCountdownTextLang();
-
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("guestNameDisplay").innerText = guestName;
+});
 </script>
 </body>
 </html>
