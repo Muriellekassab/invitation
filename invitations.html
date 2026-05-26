@@ -341,7 +341,10 @@ body.rtl .location-btn {
 <div id="firstPage">
     <div class="heart">♥</div>
     <div id="welcomeBox">
-        <h2>To: <span id="guestNameDisplay"></span></h2>
+        <h2>
+            <span id="toText">To:</span>
+            <span id="guestNameDisplay"></span>
+        </h2>
         <div id="line"></div>
         <p>Join us in making memories together!</p>
         <div id="line"></div>
@@ -563,8 +566,8 @@ function applyLang(){
   const t = texts[lang];
 
   // Welcome box
-
-  document.querySelector("#welcomeBox h2").innerText = t.welcomeBoxTitle + guestName;
+document.getElementById("toText").innerText = t.welcomeBoxTitle;
+document.getElementById("guestNameDisplay").innerText = guestName;
   document.querySelector("#welcomeBox p").innerText = t.welcomeBoxMessage;
   document.querySelector("#welcomeBtn ").innerText = t.welcomeBoxbtn;
 
@@ -776,15 +779,6 @@ updateCountdown();
 // Update countdown text on language switch
 updateCountdownTextLang();
 
-function setGuestName() {
-    const nameEl = document.getElementById("guestNameDisplay");
-    if (nameEl) {
-        nameEl.innerText = guestName;
-    }
-}
-document.addEventListener("DOMContentLoaded", () => {
-    setGuestName();
-});
 </script>
 </body>
 </html>
