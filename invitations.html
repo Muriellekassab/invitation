@@ -173,7 +173,7 @@ header { position: fixed;
     font-weight: 200;
     color:rgb(67,18,24);                        /* deep, warm color like your screenshot */
     letter-spacing: 1px;
-    text-align: center;
+    text-align: top;
     margin-bottom: 20px;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.3);  /* soft shadow for elegance */
 }
@@ -212,7 +212,10 @@ header { position: fixed;
     letter-spacing: 1px;
     opacity: 0.9;
 }
-
+#slide3Img + .overlay {
+    justify-content: flex-start;
+    padding-top: 200px;
+}
 .countdown-sub {
     font-family: 'Great Vibes', cursive;
     font-size: 48px;      /* base font size */
@@ -429,7 +432,7 @@ body.rtl .location-btn {
 
         <div class="overlay">
             <h2 id="confirm">Say YES to love, fun, and cake!</h2>
-            <button id="rsvpBtn" class="frosted-btn" >Confirm</button>
+            <button id="rsvpBtn" class="frosted-btn"href="#" target="_blank" >Confirm</button>
             <a id="whatsBtn" class="frosted-btn" href="#" target="_blank">WhatsApp</a>
         </div>
     </div>
