@@ -341,7 +341,7 @@ body.rtl .location-btn {
 <div id="firstPage">
     <div class="heart">♥</div>
     <div id="welcomeBox">
-        <h2 id="guestNameTitle">To: Invité</h2>
+        <h2>To: <span id="guestNameDisplay"></span></h2>
         <div id="line"></div>
         <p>Join us in making memories together!</p>
         <div id="line"></div>
@@ -484,7 +484,9 @@ const WHATS_TEXT_AR = "أؤكد حضوري";
 const params = new URLSearchParams(window.location.search);
 const nomParam = params.get("nom") || "";
 const guestName = decodeURIComponent(nomParam.replace(/\+/g," ")) || "Invité";
-
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("guestNameDisplay").innerText = guestName;
+});
 const texts = {
   fr: {
     welcome: `"So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate."(Matthew 19:6)`,
@@ -563,11 +565,9 @@ function applyLang(){
   const t = texts[lang];
 
   // Welcome box
-
- document.getElementById("guestNameTitle").innerText =
-    "To: " + guestName;
+  document.getElementById("guestNameDisplay").innerText = guestName || "Invité";
   document.querySelector("#welcomeBox p").innerText = t.welcomeBoxMessage;
-  document.querySelector("#welcomeBtn ").innerText = t.welcomeBoxbtn;
+  document.querySelector("#welcomeBtn").innerText = t.welcomeBoxbtn;
 
   const welcomeBox = document.getElementById("welcomeBox");
   if(lang === "ar"){
