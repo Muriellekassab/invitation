@@ -482,8 +482,7 @@ const WHATS_TEXT_FR = "We confirm our presence";
 const WHATS_TEXT_AR = "أؤكد حضوري";
 
 const params = new URLSearchParams(window.location.search);
-const nomParam = params.get("nom") || "";
-const guestName = decodeURIComponent(nomParam.replace(/\+/g," ")) || "Invité";
+const guestName = (params.get("nom") || "Invité").replace(/\+/g, " ");
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("guestNameDisplay").innerText = guestName;
 });
