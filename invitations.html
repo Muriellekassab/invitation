@@ -364,7 +364,43 @@ body.rtl .location-btn {
         border-radius: 5px;
     }
 }
+/* ===== MOBILE FIX (IMPORTANT) ===== */
+@media (max-width: 480px) {
 
+    /* COUNTDOWN */
+    .countdown {
+        flex-wrap: wrap;        /* allows wrapping */
+        justify-content: center;
+        gap: 12px;
+        margin-top: 60px;
+    }
+
+    .time-box span {
+        font-size: 28px !important;
+    }
+
+    .time-box small {
+        font-size: 14px !important;
+    }
+
+    /* RSVP GROUP */
+    .rsvp-group {
+        width: 90%;
+        top: 78%;
+    }
+
+    /* BUTTONS */
+    .frosted-btn {
+        min-width: unset;
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    #rsvpBtn, #whatsBtn {
+        width: 100%;
+    }
+}
 @media(max-width:480px){ .overlay h2{font-size:26px} .overlay p{font-size:16px} }
 </style>
 </head>
@@ -447,7 +483,7 @@ body.rtl .location-btn {
                 Location
             </a>
 
-            <a href="https://maps.app.goo.gl/Pdtw95Z3wEoK9u2W7?g_st=ipc"
+            <a href="https://maps.app.goo.gl/NJpQ5UrXDJWRuc3o7?g_st=iw"
                target="_blank"
                class="location-btn loc-3">
                 Location
