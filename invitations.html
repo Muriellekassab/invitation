@@ -34,11 +34,11 @@ header { position: fixed;
 
 .navbar-brand h4 { margin: 0;
             font-style: italic;
-             color: #811C23;
+             color:rgb(67,18,24);
               font-weight: 600; }
 
 
-#lang-toggle { color: #811C23;
+#lang-toggle { color: rgb(67,18,24);
     background: transparent;
     border: none;
     font-weight: 600;
@@ -52,13 +52,13 @@ header { position: fixed;
 #firstPage .beige-overlay { position: absolute; inset: 0; background: rgba(237, 228, 211, 0.55); z-index: 2; opacity: 0; transition: opacity 1s ease; }
 #firstPage.bg-photo::before, #firstPage.bg-photo::after, #firstPage.bg-photo .beige-overlay { opacity: 1; }
 
-.heart { font-size: 80px; color: #811C23; animation: beat 1s infinite alternate; margin-bottom: 20px; z-index: 5; }
+.heart { font-size: 80px; color: rgb(67,18,24); animation: beat 1s infinite alternate; margin-bottom: 20px; z-index: 5; }
 @keyframes beat { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
 
 #welcomeBox { width: 360px; background: rgba(255,255,255,0.95); color: #222; padding: 20px 24px 24px 24px; border-radius: 12px; text-align: left; display: flex; flex-direction: column; opacity: 0; transform: translateY(20px); transition: opacity 1s ease, transform 1s ease; position: relative; z-index: 5; }
 #welcomeBox.show { opacity: 1; transform: translateY(0); }
 #line { height: 1px; background: #ccc; margin: 12px 0; width: 100%; }
-#welcomeBtn { background:#F0EEE9; color: #811C23; font-weight: 700; margin-top: auto; align-self: flex-end; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+#welcomeBtn { background:#F0EEE9; color: rgb(67,18,24); font-weight: 700; margin-top: auto; align-self: flex-end; padding: 10px 20px; border-radius: 8px; cursor: pointer;  border: 1px solid rgba(255,255,255,0.4);}
 #welcomeBox h2 { font-size: 20px; margin-bottom: 12px; font-weight:600}
 
 
@@ -94,6 +94,7 @@ header { position: fixed;
 .overlay p { font-size: 18px; margin-bottom: 200px; }
 .btn { display: inline-block; padding: 12px 22px; border-radius: 25px; background: rgba(255,255,255,0.9); color: #222; text-decoration: none; font-weight: 700; margin: 6px; cursor: pointer; }
 .btn.disabled{background:rgba(200,200,200,0.7);cursor:default}
+
 
 #slide1Img + .overlay {
     display: none;
@@ -190,7 +191,7 @@ header { position: fixed;
     color:rgb(67,18,24);
     display: flex;
     gap: 30px;
-    margin-top: 30px;
+    margin-top: 160px;
     font-style: italic;
 }
 
@@ -200,7 +201,7 @@ header { position: fixed;
 }
 
 .time-box span {
-    font-size: 48px;
+    font-size: 75px;
     font-weight: 600;
     display: block;
     font-style: italic;
@@ -208,7 +209,7 @@ header { position: fixed;
 }
 
 .time-box small {
-    font-size: 14px;
+    font-size: 40px;
     letter-spacing: 1px;
     opacity: 0.9;
 }
@@ -264,51 +265,86 @@ header { position: fixed;
 }
 
 /* Adjust these positions */
-.loc-1 { top:32%; left:67.5%; }
-.loc-2 { top: 44.5%; left: 67.5%; }
-.loc-3 { top: 56%; left: 67.5%; }
-.loc-4 { top: 67.5%; left: 67.5%; }
+.loc-1 { top:21.5%; left:67.5%; }
+.loc-2 { top: 29.5%; left: 67.5%; }
+.loc-3 { top: 37%; left: 67.5%; }
+.loc-4 { top: 45%; left: 67.5%; }
 
 /* RTL support */
 body.rtl .location-btn {
     direction: rtl;
 }
+
+.overlay:last-of-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.rsvp-group {
+    width: 240px;
+    position: absolute;
+    top: 74%;   /* 👈 adjust this to move it up/down */
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 20;
+}
 /* Make RSVP & WhatsApp buttons like location buttons */
 .frosted-btn {
+    display: block !important;
     background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(98,98,98,0.1));
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    font-weight: 500;
-    color:rgb(240, 238, 233);
+
+    font-weight: 700;
+    color: #431218;
+
     padding: 18px 36px;
-    min-width: 120px;       /* same width as location buttons */
+    min-width: 220px;
     text-align: center;
+    pointer-events:auto;
     border-radius: 8px;
     font-size: 18px;
     text-decoration: none;
-    display: inline-block;
+
+    position: relative;
+    z-index: 10;
+
+    transition: all 0.3s ease;
+
+    /* EXACT SAME SHADOW AS LOCATION */
     box-shadow:
         0 8px 15px rgba(0,0,0,0.1),
         inset 0 2px 4px rgba(255,255,255,0.2),
         inset 0 -2px 4px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
 }
-
 .frosted-btn:hover {
     background: #F0EEE9;
     transform: translateY(-2px);
 }
 #rsvpBtn {
+ width: 100%;
+    border: 1px solid rgba(255,255,255,0.4);
     color: rgb(67,18,24) !important;
 }
 #whatsBtn {
+ width: 100%;
+    border: 1px solid rgba(255,255,255,0.4);
     color: rgb(67,18,24) !important;
 }
 #confirm {
-    margin-bottom: 24px; /* add more space below the heading */
     font-size: 28px;     /* optional: make it a bit bigger for energy */
     text-align: center;  /* center the heading */
+}
+
+.modal.rtl {
+    direction: rtl;
+    text-align: right;
 }
 
 /* Mobile */
@@ -371,7 +407,6 @@ body.rtl .location-btn {
     <div class="slide">
         <img id="slide3Img" src="3eng.png" alt="">
         <div class="overlay">
-            <h2 id="countdownTitle">Not long to go...</h2>
 
             <div class="countdown">
                 <div class="time-box">
@@ -392,7 +427,6 @@ body.rtl .location-btn {
                 </div>
             </div>
 
-            <p class="countdown-sub">…Until we become one!</p>
         </div>
     </div>
 
@@ -426,16 +460,14 @@ body.rtl .location-btn {
             </a>
 
         </div>
-    </div>
-        <div class="slide">
-            <img id="slide5Img" src="5eng.png" alt="">
-
         <div class="overlay">
-            <h2 id="confirm">Say YES to love, fun, and cake!</h2>
-            <button id="rsvpBtn" class="frosted-btn"href="#" target="_blank" >Confirm</button>
-            <a id="whatsBtn" class="frosted-btn" href="#" target="_blank">WhatsApp</a>
+            <div class="rsvp-group">
+                <button id="rsvpBtn" class="frosted-btn">Confirm</button>
+                <a id="whatsBtn" class="frosted-btn" href="#" target="_blank">WhatsApp</a>
+            </div>
         </div>
     </div>
+
 </div>
 
 <div class="progress" id="progress">
@@ -463,8 +495,8 @@ body.rtl .location-btn {
             <input type="text" id="message" placeholder="">
         </div>
         <div class="row">
-            <button id="sendBtn" class="btn" style="background:#811C23;color:white;">Will Attend</button>
-            <button id="notAttendBtn" class="btn" style="background:#811C23;color:white;">Cannot Attend</button>
+            <button id="sendBtn" class="btn" style="background:rgb(67,18,24);;color:white;">Will Attend</button>
+            <button id="notAttendBtn" class="btn" style="background:rgb(67,18,24);;color:white;">Cannot Attend</button>
         </div>
         <p id="feedback" style="margin-top:10px;font-size:14px"></p>
     </div>
@@ -494,7 +526,7 @@ const texts = {
     welcome: `"So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate."(Matthew 19:6)`,
     names: "Wadih & Caline",
     date: "Le 21 Août 2026 à Beyrouth",
-    confirm: "Say YES to love, fun, and cake!",
+
     rsvpBtn: "Say YES to love, fun, and cake!",
     whatsBtn: "WhatsApp",
     modalTitle: "Confirm your presence",
@@ -519,7 +551,6 @@ const texts = {
     welcome: " (إِذاً لَيْسَا بَعْدُ اثْنَيْنِ بَلْ جَسَدٌ وَاحِدٌ. فَالَّذِي جَمَعَهُ اللَّهُ لاَ يُفَرِّقُهُ إِنْسَانٌ(متى ١٩ :٦",
     names: "وَدِيع وكالين",
     date: "٢١ أغسطس ٢٠٢٦ - بيروت",
-    confirm: "يرجى تأكيد الحضور",
     rsvpBtn: "أؤكد حضوري",
     whatsBtn: " واتساب",
     modalTitle: "تأكيد الحضور",
@@ -550,7 +581,6 @@ const el = id => document.getElementById(id);
 const welcomeEl = el("slide1Text");
 const namesEl = el("names");
 const dateEl = el("date");
-const confirmEl = el("confirm");
 const rsvpBtn = el("rsvpBtn");
 const whatsBtn = el("whatsBtn");
 const langToggle = el("lang-toggle");
@@ -563,6 +593,7 @@ const notAttendBtn = el("notAttendBtn");
 const closeBtn = el("closeBtn");
 const feedback = el("feedback");
 const modalTitle = el("modalTitle");
+
 function applyLang(){
   const t = texts[lang];
 
@@ -570,8 +601,9 @@ function applyLang(){
   document.getElementById("guestNameDisplay").innerText = guestName || "Invité";
   document.querySelector("#welcomeBox p").innerText = t.welcomeBoxMessage;
   document.querySelector("#welcomeBtn").innerText = t.welcomeBoxbtn;
-
+  const welcomeBtn = document.getElementById("welcomeBtn");
   const welcomeBox = document.getElementById("welcomeBox");
+
   if(lang === "ar"){
       document.body.classList.add("rtl");   // global RTL
       welcomeBox.classList.add("rtl");      // welcome box RTL
@@ -582,11 +614,12 @@ function applyLang(){
       welcomeBtn.classList.remove("rtl")
   }
 
+
   // Slider texts
   welcomeEl.innerText = t.welcome;
   namesEl.innerText = t.names;
   dateEl.innerText = t.date;
-  confirmEl.innerText = t.confirm;
+
 
   modalTitle.innerText = t.modalTitle;
   el("labelName").innerText = t.labelName;
@@ -596,21 +629,22 @@ function applyLang(){
   notAttendBtn.innerText = t.notAttendBtn;
   closeBtn.innerText = t.closeBtn;
 
-  // **Countdown texts**
-  document.getElementById("countdownTitle").innerText = lang === "ar" ? "لم يتبقى الكثير..." : "Not long to go...";
-  document.querySelector(".countdown-sub").innerText = lang === "ar" ? "… حتى نصبح شخصاواحداً !" : "…Until we become one!";
 
   // WhatsApp link
-  const text = lang==="fr"?WHATS_TEXT_FR:WHATS_TEXT_AR;
-  whatsBtn.href = `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(text + " - " + guestName)}`;
+ const whatsBtnEl = document.getElementById("whatsBtn");
+
+if (whatsBtnEl) {
+  const text = lang === "fr" ? WHATS_TEXT_FR : WHATS_TEXT_AR;
+  const message = `${text} - ${guestName}`;
+
+  whatsBtnEl.setAttribute(
+    "href",
+    `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(message)}`
+  );
+}
   guestNameInput.value = guestName;
 
   // First slide image
-  el("slide1Img").src = lang==="ar" ? "1ar.png" : "1eng.png";
-  el("slide2Img").src = (lang==="ar") ? "2ar.png" : "2eng.png";
-    el("slide3Img").src = lang==="ar" ? "3ar.png" : "3eng.png";
-  el("slide4Img").src = (lang==="ar") ? "4ar.png" : "4eng.png";
-
   const closeBtnEl = el("closeBtn");
   closeBtnEl.classList.toggle("fr", lang === "fr");
   closeBtnEl.classList.toggle("ar", lang === "ar");
@@ -618,7 +652,13 @@ function applyLang(){
 
 langToggle.addEventListener("click", ()=>{
     lang = lang==="fr"?"ar":"fr";
-    applyLang();
+
+  el("slide1Img").src = lang==="ar" ? "1ar.png" : "1eng.png";
+  el("slide2Img").src = (lang==="ar") ? "2ar.png" : "2eng.png";
+  el("slide3Img").src = lang==="ar" ? "3ar.png" : "3eng.png";
+  el("slide4Img").src = (lang==="ar") ? "4ar.png" : "4eng.png";
+ applyLang();
+
 });
 
 // Let's Celebrate button
@@ -776,9 +816,17 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Update countdown text on language switch
-updateCountdownTextLang();
+function updateWhatsApp() {
+  const btn = document.getElementById("whatsBtn");
+  if (!btn) return;
 
+  const text = lang === "fr" ? WHATS_TEXT_FR : WHATS_TEXT_AR;
+  const message = `${text} - ${guestName}`;
+
+  btn.href = `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+updateWhatsApp();
+applyLang();
 </script>
 </body>
 </html>
